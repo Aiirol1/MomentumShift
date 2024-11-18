@@ -112,6 +112,7 @@ func handleSmoothMovement(delta):
 			velocity -= velocity.normalized() * FRICTION * delta
 		else:
 			velocity = Vector2.ZERO
+			print("ja")
 			shooting = false
 			bouncing = false
 	else:
