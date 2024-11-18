@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=4 uid="uid://cjim5aniugmvh"]
+
+[ext_resource type="PackedScene" uid="uid://cobtdqu0kwfbs" path="res://Scenes/player.tscn" id="1_cko0r"]
+[ext_resource type="Texture2D" uid="uid://jclxonbb4fdt" path="res://Assets/Wall.png" id="2_dh7yk"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1dcny"]
+texture = ExtResource("2_dh7yk")
+margins = Vector2i(7, 0)
+texture_region_size = Vector2i(18, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-9, -12.048, -7.93357, -11.9692, -7.99263, -16, 7.83513, -16, 7.67764, -11.9692, 9, -11.9692, 9, 11.8905, 7.99262, 11.8905, 7.91388, 16, -7.99263, 16, -7.99263, 12.048, -9, 11.9693)
+
+[sub_resource type="TileSet" id="TileSet_kt705"]
+tile_size = Vector2i(18, 32)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_1dcny")
+
+[node name="MomentumShift" type="Node2D"]
+
+[node name="GUILayer" type="CanvasLayer" parent="."]
+
+[node name="MomentumBar" type="ProgressBar" parent="GUILayer"]
+modulate = Color(0, 0.678431, 1, 1)
+offset_right = 152.0
+offset_bottom = 27.0
+value = 50.0
+
+[node name="FutureMomentumBar" type="ProgressBar" parent="GUILayer"]
+offset_right = 152.0
+offset_bottom = 27.0
+value = 50.0
+show_percentage = false
+
+[node name="Player" parent="." node_paths=PackedStringArray("momentumBar", "futureMomentumBar") instance=ExtResource("1_cko0r")]
+position = Vector2(155, 134)
+momentumBar = NodePath("../GUILayer/MomentumBar")
+futureMomentumBar = NodePath("../GUILayer/FutureMomentumBar")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Node2D"]
+tile_map_data = PackedByteArray("AAD8/wAAAAAAAAAAAAD8/wEAAAAAAAAAAAD8/wIAAAAAAAAAAAD8/wMAAAAAAAAAAAD8/wQAAAAAAAAAAAD8/wUAAAAAAAAAAAD8/wYAAAAAAAAAAAD8/wcAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_kt705")
+metadata/bounceStrength = 1.0
+
+[connection signal="momentumChanged" from="Player" to="Player" method="_on_momentum_changed"]
