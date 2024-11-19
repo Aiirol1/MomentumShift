@@ -9,7 +9,10 @@ var collision: KinematicCollision2D
 var bouncing: bool = false
 var shooting: bool = false
 
+##to fix not possible to shoot with -1 momentum
+
 var momentum: float = 100
+var futureMomentum: float = 100
 
 const FRICTION = 1000
 const MAX_SPEED = 800
@@ -41,7 +44,7 @@ func _physics_process(delta):
 	
 
 func input(delta):
-	if mouseInNear() && !shooting:
+	if canCharge():
 		if Input.is_action_pressed("LeftClick"):
 			chargeArrow()
 		if Input.is_action_just_released("LeftClick"):
@@ -59,10 +62,16 @@ func input(delta):
 		resetFutureMomentum()
 		powerArrow.hide()
 		
-	if charged and Input.is_action_just_pressed("Space"):
+	if charged and Input.is_action_just_pressed("Space") and enoughMomentum():
 		shooting = true
 		shoot()
 		
+func canCharge() -> bool:
+	return mouseInNear() && !shooting
+	
+func enoughMomentum() -> bool:
+	return futureMomentum > 0
+	
 func shoot():
 	startPos = self.position
 	movement = getShootValues()
@@ -93,8 +102,6 @@ func calulateBounceOffPostition():
 	var reflect = collision.get_remainder().bounce(collision.get_normal())
 	velocity = velocity.bounce(collision.get_normal()) * bounceStrength
 	startPos = self.position
-		
-
 	
 func getShootValues() -> Vector2:
 	var newPos: Vector2
@@ -122,7 +129,10 @@ func handleSmoothMovement(delta):
 func showFutureMomentum(value: float):
 	futureMomentumBar.value = momentumBar.value
 	futureMomentumBar.show()
+	
+	value = 1 if (value < 1) else value
 	futureMomentumBar.value = futureMomentumBar.value - int(value)
+	futureMomentum = futureMomentumBar.value
 	
 func resetFutureMomentum():
 	var tween = get_tree().create_tween()
@@ -166,15 +176,16 @@ func mouseInNear() -> bool:
 	var distance = abs(mousePosition - self.position)
 	var buffer = 100
 	
-	return distance.length() <= buffer and distance.length() > 16 #Size of circle / 2
+	return distance.length() <= buffer
 
 func tweenFinished():
 	futureMomentumBar.hide()
 
-
 func _on_momentum_changed(value):
+	value = -1 if (value > -1) else value
+	
 	momentum += value
 	var tween = get_tree().create_tween()
-	tween.tween_property(momentumBar, "value", futureMomentumBar.value, 0.2)
+	tween.tween_property(momentumBar, "value", momentum, 0.2)
 	
 	futureMomentumBar.hide()
