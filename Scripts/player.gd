@@ -9,8 +9,6 @@ var collision: KinematicCollision2D
 var bouncing: bool = false
 var shooting: bool = false
 
-##to fix not possible to shoot with -1 momentum
-
 var momentum: float = 100
 var futureMomentum: float = 100
 
@@ -62,17 +60,23 @@ func input(delta):
 		resetFutureMomentum()
 		powerArrow.hide()
 		
-	if charged and Input.is_action_just_pressed("Space") and enoughMomentum():
+	if canShoot():
 		shooting = true
 		shoot()
+		
+func canShoot() -> bool:
+	return charged and Input.is_action_just_pressed("Space") and enoughMomentum() and enoughFutureMomentum()
 		
 func canCharge() -> bool:
 	return mouseInNear() && !shooting
 	
 func enoughMomentum() -> bool:
-	return futureMomentum > 0
+	return momentum > 0 
 	
-func shoot():
+func enoughFutureMomentum() -> bool:
+	return futureMomentum >= -1
+	
+func shoot(): 
 	startPos = self.position
 	movement = getShootValues()
 	firstShot = false
@@ -128,11 +132,12 @@ func handleSmoothMovement(delta):
 			
 func showFutureMomentum(value: float):
 	futureMomentumBar.value = momentumBar.value
+	futureMomentum = futureMomentumBar.value
 	futureMomentumBar.show()
 	
 	value = 1 if (value < 1) else value
 	futureMomentumBar.value = futureMomentumBar.value - int(value)
-	futureMomentum = futureMomentumBar.value
+	futureMomentum = futureMomentum - value
 	
 func resetFutureMomentum():
 	var tween = get_tree().create_tween()
