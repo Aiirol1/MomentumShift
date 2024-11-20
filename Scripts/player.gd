@@ -8,16 +8,22 @@ var charged: bool = false
 var collision: KinematicCollision2D
 var bouncing: bool = false
 var shooting: bool = false
+var circleColor: Color = Color.TRANSPARENT
+
 
 var momentum: float = 100
 var futureMomentum: float = 100
 
-const FRICTION = 1000
-const MAX_SPEED = 800
-const ACCELERATION = 500
-const MAX_MOMENTUM = 100
+
+const MOUSE_DISTANCE_BUFFER: int = 100
+const FRICTION: int = 1000
+const MAX_SPEED: int = 800
+const ACCELERATION: int = 500
+const MAX_MOMENTUM: int = 100
+const MAX_CHARGING_VALUE: int = 4
 
 const CAMERA_ZOOM = Vector2(1, 1)
+
 
 @export var momentumBar: ProgressBar
 @export var futureMomentumBar: ProgressBar
@@ -44,13 +50,16 @@ func _physics_process(delta):
 func input(delta):
 	if canCharge():
 		if Input.is_action_pressed("LeftClick"):
+			drawCircle()
 			chargeArrow()
 		if Input.is_action_just_released("LeftClick"):
 			charged = true
+			hideCircle()
 			resetZoom()
 
 	else:
 		if !charged:
+			hideCircle()
 			resetZoom()
 			resetFutureMomentum()
 			powerArrow.hide()
@@ -82,7 +91,7 @@ func shoot():
 	firstShot = false
 	powerArrow.hide()
 	charged = false
-	momentumChanged.emit(-powerArrow.scale.x * 4)
+	momentumChanged.emit(-powerArrow.scale.x * MAX_CHARGING_VALUE)
 	
 
 func chargeArrow():
@@ -91,7 +100,7 @@ func chargeArrow():
 	resizePowerArrow()
 	recolorPowerArrow()
 	zoomCamera()
-	showFutureMomentum(powerArrow.scale.x * 4)
+	showFutureMomentum(powerArrow.scale.x * MAX_CHARGING_VALUE)
 
 
 func bounceOff():
@@ -158,11 +167,13 @@ func movePowerArrow():
 	powerArrow.look_at(mousePosition)
 	
 func recolorPowerArrow():
-	powerArrow.set_self_modulate(Color8(255, 230 - int(powerArrow.scale.x * 40), 0))
+	powerArrow.set_self_modulate(Color8(255, 230 - int(powerArrow.scale.x * MAX_CHARGING_VALUE * 10), 0))
 	
 func resizePowerArrow():
 	var distance = mousePosition.distance_to(self.position)
 	var target_scale = distance / 20
+	
+	target_scale = clamp(target_scale, 0, MAX_CHARGING_VALUE)
 
 	var tween = get_tree().create_tween()
 	tween.tween_property(powerArrow, "scale:x", target_scale, 0.3)
@@ -179,12 +190,23 @@ func resetZoom():
 	
 func mouseInNear() -> bool:
 	var distance = abs(mousePosition - self.position)
-	var buffer = 100
 	
-	return distance.length() <= buffer
+	return distance.length() <= MOUSE_DISTANCE_BUFFER
 
 func tweenFinished():
 	futureMomentumBar.hide()
+	
+func drawCircle():
+	circleColor = Color.RED
+	queue_redraw()
+	
+func hideCircle():
+	circleColor = Color.TRANSPARENT
+	queue_redraw()
+	
+func _draw():
+	var local_position = to_local(self.global_position)
+	draw_circle(local_position, MOUSE_DISTANCE_BUFFER, circleColor, false, 1, true)
 
 func _on_momentum_changed(value):
 	value = -1 if (value > -1) else value
