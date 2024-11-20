@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=4 uid="uid://cjim5aniugmvh"]
+[gd_scene load_steps=9 format=4 uid="uid://cjim5aniugmvh"]
 
 [ext_resource type="PackedScene" uid="uid://cobtdqu0kwfbs" path="res://Scenes/player.tscn" id="1_cko0r"]
+[ext_resource type="Script" path="res://Scripts/tile_maps.gd" id="2_87g4r"]
 [ext_resource type="Texture2D" uid="uid://jclxonbb4fdt" path="res://Assets/Wall.png" id="2_dh7yk"]
+[ext_resource type="Texture2D" uid="uid://dmbq3wlo18vfh" path="res://Assets/Floor.png" id="4_xagkb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1dcny"]
 texture = ExtResource("2_dh7yk")
@@ -15,7 +17,31 @@ tile_size = Vector2i(18, 32)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_1dcny")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1ygcb"]
+texture = ExtResource("4_xagkb")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+1:1/0 = 0
+0:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_o7yvx"]
+tile_size = Vector2i(32, 32)
+sources/1 = SubResource("TileSetAtlasSource_1ygcb")
+
 [node name="MomentumShift" type="Node2D"]
+
+[node name="TileMaps" type="Node2D" parent="."]
+script = ExtResource("2_87g4r")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="TileMaps"]
+tile_map_data = PackedByteArray("AAD8/wAAAAAAAAAAAAD8/wEAAAAAAAAAAAD8/wIAAAAAAAAAAAD8/wMAAAAAAAAAAAD8/wQAAAAAAAAAAAD8/wUAAAAAAAAAAAD8/wYAAAAAAAAAAAD8/wcAAAAAAAAAAAAAAAEAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_kt705")
+metadata/bounceStrength = 1.0
+
+[node name="Floor" type="TileMapLayer" parent="TileMaps"]
+tile_set = SubResource("TileSet_o7yvx")
+rendering_quadrant_size = 32
 
 [node name="GUILayer" type="CanvasLayer" parent="."]
 
@@ -37,12 +63,5 @@ show_percentage = false
 position = Vector2(155, 134)
 momentumBar = NodePath("../GUILayer/MomentumBar")
 futureMomentumBar = NodePath("../GUILayer/FutureMomentumBar")
-
-[node name="Node2D" type="Node2D" parent="."]
-
-[node name="TileMapLayer" type="TileMapLayer" parent="Node2D"]
-tile_map_data = PackedByteArray("AAD8/wAAAAAAAAAAAAD8/wEAAAAAAAAAAAD8/wIAAAAAAAAAAAD8/wMAAAAAAAAAAAD8/wQAAAAAAAAAAAD8/wUAAAAAAAAAAAD8/wYAAAAAAAAAAAD8/wcAAAAAAAAAAAA=")
-tile_set = SubResource("TileSet_kt705")
-metadata/bounceStrength = 1.0
 
 [connection signal="momentumChanged" from="Player" to="Player" method="_on_momentum_changed"]
