@@ -7,17 +7,17 @@ func canDraw(maxRange: int) -> bool:
 	
 	return _draw == 0
 
-func isAtLine(height: int, width: int, lineNumber: int) -> bool:
+func isAtLine(coords: Vector2, lineNumber: int) -> bool:
 	var lineNumberEnd = lineNumber + 1
 	
-	return (height == lineNumber or width == lineNumber)
+	return (coords.y == lineNumber or coords.x == lineNumber)
 	
-func hasTileOnTop(tileCoords: Vector2) -> bool:
+func hasTileOnTop(tileCoords: Vector2i) -> bool:
 	var usedCells = get_used_cells()
 	return usedCells.has(Vector2i(tileCoords.x, tileCoords.y - 1))
 		
 	
-func hasTileOnSide(tileCoords: Vector2) -> bool:
+func hasTileOnLeftSide(tileCoords: Vector2i) -> bool:
 	var usedCells = get_used_cells()
 	return usedCells.has(Vector2i(tileCoords.x - 1, tileCoords.y))
 	
