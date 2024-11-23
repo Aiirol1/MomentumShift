@@ -7,7 +7,7 @@ func canDraw(maxRange: int) -> bool:
 	
 	return _draw == 0
 
-func isAtLine(coords: Vector2, lineNumber: int) -> bool:
+func isAtLine(lineNumber: int, coords: Vector2) -> bool:
 	var lineNumberEnd = lineNumber + 1
 	
 	return (coords.y == lineNumber or coords.x == lineNumber)
