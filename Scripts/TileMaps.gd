@@ -8,8 +8,6 @@ func canDraw(maxRange: int) -> bool:
 	return _draw == 0
 
 func isAtLine(lineNumber: int, coords: Vector2) -> bool:
-	var lineNumberEnd = lineNumber + 1
-	
 	return (coords.y == lineNumber or coords.x == lineNumber)
 	
 func hasTileOnTop(tileCoords: Vector2i) -> bool:

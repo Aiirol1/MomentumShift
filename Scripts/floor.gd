@@ -1,21 +1,18 @@
 extends TileMaps
 
-var minBounds
-var maxBounds
+var _minBounds
+var _maxBounds
+var bounds
 
 
 func _ready():
 	spawnFloor()
 
-func _process(_delta):
-	pass
-
-
 func spawnFloor():
 	var randomNumber: RandomNumberGenerator = RandomNumberGenerator.new()
-	var bounds = getRandomBounds(30, 30, 10)
-	maxBounds = max(bounds.x, bounds.y)
-	minBounds = min(bounds.x, bounds.y)
+	bounds = getRandomBounds(30, 30, 10)
+	_maxBounds = max(bounds.x, bounds.y)
+	_minBounds = min(bounds.x, bounds.y)
 	
 	for width in bounds.x:
 		for height in bounds.y:
@@ -32,14 +29,14 @@ func spawnFloor():
 				drawWidthSecondLine(coords, atlasCoords)
 				drawHeightSecondLine(coords, atlasCoords)
 				
-			elif isAtLine(maxBounds-2, coords): ## second outer line 
+			elif isAtLine(_maxBounds-2, coords): ## second outer line 
 				if canDraw(1):
 					set_cell(coords, 1, atlasCoords)
 					
-			elif isAtLine(minBounds-1, coords):
-				LastLineOnMinValue(coords, bounds, atlasCoords)
+			elif isAtLine(_minBounds-1, coords):
+				LastLineOnMinValue(coords, atlasCoords)
 					
-			elif isAtLine(maxBounds-1, coords):
+			elif isAtLine(_maxBounds-1, coords):
 				lastLine(coords, atlasCoords)
 					
 			else: set_cell(coords, 1, atlasCoords) ##is on other line just draw the cell
@@ -59,37 +56,37 @@ func drawHeightSecondLine(coords: Vector2i, atlasCoords: Vector2i):
 		elif canDraw(1):
 			set_cell(coords, 1, atlasCoords)
 			
-func drawWidthSecondOuterLine(bounds:Vector2i, coords: Vector2i, atlasCoords: Vector2i):
-	if coords.x == minBounds - 1:
+func drawWidthSecondOuterLine(coords: Vector2i, atlasCoords: Vector2i):
+	if coords.x == _minBounds - 1:
 		if hasTileOnLeftSide(coords) and canDraw(1): 
-			set_cell(Vector2i(minBounds, coords.y), 1, atlasCoords)
-	elif bounds.x == maxBounds:
+			set_cell(Vector2i(_minBounds, coords.y), 1, atlasCoords)
+	elif bounds.x == _maxBounds:
 		set_cell(coords, 1, atlasCoords)
 		
-func drawHeightSecondOuterLine(bounds: Vector2i, coords: Vector2i, atlasCoords: Vector2i):
-	if coords.y == minBounds - 1:
+func drawHeightSecondOuterLine(coords: Vector2i, atlasCoords: Vector2i):
+	if coords.y == _minBounds - 1:
 			if hasTileOnTop(coords) and canDraw(2):
-				set_cell(Vector2i(coords.x, minBounds), 1, atlasCoords)
+				set_cell(Vector2i(coords.x, _minBounds), 1, atlasCoords)
 
 		
 func drawWidthOuterLine(coords: Vector2i, atlasCoords: Vector2i):
-	if coords.x == maxBounds - 1:
+	if coords.x == _maxBounds - 1:
 		if hasTileOnLeftSide(coords) and canDraw(1): 
 			set_cell(coords, 1, atlasCoords)
 			
 func drawHeightOuterLine(coords: Vector2i, atlasCoords: Vector2i):
-	if coords.y == maxBounds -1:
+	if coords.y == _maxBounds -1:
 		if hasTileOnTop(coords) and canDraw(2):
 			set_cell(coords, 1, atlasCoords)
 			
-func LastLineOnMinValue(coords: Vector2i, bounds: Vector2i, atlasCoords: Vector2i):
+func LastLineOnMinValue(coords: Vector2i, atlasCoords: Vector2i):
 	if isMinBounds(bounds.x):
-		drawWidthSecondOuterLine(bounds, coords, atlasCoords)
+		drawWidthSecondOuterLine(coords, atlasCoords)
 	elif isMaxBounds(bounds.x):
 		set_cell(coords, 1, atlasCoords)
 		
 	if isMinBounds(bounds.y):
-		drawHeightSecondOuterLine(bounds, coords, atlasCoords)
+		drawHeightSecondOuterLine(coords, atlasCoords)
 	elif isMaxBounds(bounds.y):
 		set_cell(coords, 1, atlasCoords)
 		
@@ -100,7 +97,10 @@ func lastLine(coords: Vector2i, atlasCoords: Vector2i):
 		drawHeightOuterLine(coords, atlasCoords)
 
 func isMinBounds(value: int) -> bool:
-	return value == minBounds
+	return value == _minBounds
 	
 func isMaxBounds(value: int) -> bool:
-	return value == maxBounds
+	return value == _maxBounds
+	
+func get_bounds() -> Vector2i:
+	return bounds

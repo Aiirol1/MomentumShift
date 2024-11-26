@@ -20,7 +20,8 @@ sources/1 = SubResource("TileSetAtlasSource_1ygcb")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bgp4h"]
 texture = ExtResource("3_66uia")
-texture_region_size = Vector2i(32, 32)
+margins = Vector2i(7, 0)
+texture_region_size = Vector2i(18, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-9.11474, 11.9692, -7.99262, 12.048, -7.95325, 16.064, 7.95325, 16.0246, 8.032, 11.9692, 9.09505, 11.9692, 9.09505, -12.048, 8.11074, -12.048, 7.91388, -15.9459, -7.99262, -16.1427, -7.99262, -11.9299, -9.1738, -11.9692)
 
