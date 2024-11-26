@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cjim5aniugmvh"]
+[gd_scene load_steps=12 format=3 uid="uid://cjim5aniugmvh"]
 
 [ext_resource type="PackedScene" uid="uid://cobtdqu0kwfbs" path="res://Scenes/player.tscn" id="1_cko0r"]
 [ext_resource type="Script" path="res://Scripts/floor.gd" id="2_iguiu"]
@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://jclxonbb4fdt" path="res://Assets/Wall.png" id="3_66uia"]
 [ext_resource type="Script" path="res://Scripts/wallVertical.gd" id="4_b4bvf"]
 [ext_resource type="Texture2D" uid="uid://dmbq3wlo18vfh" path="res://Assets/Floor.png" id="4_xagkb"]
-[ext_resource type="Script" path="res://Scripts/wallHorizontal.gd" id="6_0jgvn"]
+[ext_resource type="Script" path="res://wallHrizontal.gd" id="6_0jgvn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1ygcb"]
 texture = ExtResource("4_xagkb")
@@ -20,25 +20,14 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 sources/1 = SubResource("TileSetAtlasSource_1ygcb")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1munh"]
-texture = ExtResource("3_66uia")
-texture_region_size = Vector2i(32, 32)
-0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, -16, 16, 16, 16, 16, -16)
-
-[sub_resource type="TileSet" id="TileSet_l01qd"]
-tile_size = Vector2i(32, 32)
-physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_1munh")
-
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bgp4h"]
 texture = ExtResource("3_66uia")
 texture_region_size = Vector2i(32, 32)
 1:0/0 = 0
-1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, -16, 16, 16, 16, 16, -16)
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16.1751, -8.13173, -11.9551, -7.8874, -11.9055, -8.87952, 11.8559, -8.87952, 11.9551, -8.03622, 16.122, -7.93701, 16.0228, 7.8874, 12.0047, 7.8874, 11.8559, 8.82992, -12.0543, 8.92913, -12.0047, 7.8874, -16.1716, 8.08582)
 
 [sub_resource type="TileSet" id="TileSet_8t0w6"]
-tile_size = Vector2i(32, 32)
+tile_size = Vector2i(32, 16)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_bgp4h")
 
@@ -51,18 +40,18 @@ tile_set = SubResource("TileSet_o7yvx")
 rendering_quadrant_size = 32
 script = ExtResource("2_iguiu")
 
-[node name="Walls" type="TileMapLayer" parent="TileMaps"]
+[node name="Walls" type="TileMapLayer" parent="TileMaps" node_paths=PackedStringArray("floor")]
 script = ExtResource("3_1o3v1")
+floor = NodePath("../Floor")
 
 [node name="WallVertical" type="TileMapLayer" parent="TileMaps/Walls" node_paths=PackedStringArray("floor")]
-tile_set = SubResource("TileSet_l01qd")
+tile_set = SubResource("TileSet_8t0w6")
 script = ExtResource("4_b4bvf")
 floor = NodePath("../../Floor")
 
-[node name="WallHorizontal" type="TileMapLayer" parent="TileMaps/Walls" node_paths=PackedStringArray("floor")]
+[node name="WallHorizontal" type="TileMapLayer" parent="TileMaps/Walls"]
 tile_set = SubResource("TileSet_8t0w6")
 script = ExtResource("6_0jgvn")
-floor = NodePath("../../Floor")
 
 [node name="GUILayer" type="CanvasLayer" parent="."]
 

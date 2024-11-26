@@ -1,4 +1,4 @@
-extends TileMaps
+extends Ground
 
 var _minBounds
 var _maxBounds
@@ -95,6 +95,18 @@ func lastLine(coords: Vector2i, atlasCoords: Vector2i):
 		drawWidthOuterLine(coords, atlasCoords)
 	if isMaxBounds(coords.x):
 		drawHeightOuterLine(coords, atlasCoords)
+		
+func getLeftTilesXValues() -> Array[Vector2i]:
+	return getSmallestXValues(bounds.y)
+	
+func getTopTilesYValues() -> Array[Vector2i]:
+	return getSmallestYValues(bounds.x)
+	
+func getRightTilesXValues() -> Array[Vector2i]:
+	return getHighestXValues(bounds.y)
+	
+func getGroundTilesYValues() -> Array[Vector2i]:
+	return getHighestYValues(bounds.x)
 
 func isMinBounds(value: int) -> bool:
 	return value == _minBounds
@@ -102,5 +114,3 @@ func isMinBounds(value: int) -> bool:
 func isMaxBounds(value: int) -> bool:
 	return value == _maxBounds
 	
-func get_bounds() -> Vector2i:
-	return bounds
