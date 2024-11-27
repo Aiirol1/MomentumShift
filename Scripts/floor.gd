@@ -1,13 +1,13 @@
 extends Ground
 
-var _minBounds
-var _maxBounds
+var _minBounds:
+var _maxBounds:
 var bounds
 
 
 func _ready():
 	spawnFloor()
-
+	
 func spawnFloor():
 	var randomNumber: RandomNumberGenerator = RandomNumberGenerator.new()
 	bounds = getRandomBounds(30, 30, 10)

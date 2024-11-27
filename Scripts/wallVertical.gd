@@ -12,6 +12,9 @@ func setYCellsOnLeft():
 	for value in yCells:
 		if value.y > 0:
 			set_cell(Vector2i(value.x, value.y), 0, Vector2i(0, 0), 0)
+			if !floor.hasTileOnLeftSide(value):
+				set_cell(Vector2i(value.x - 1, value.y), 0, Vector2i(0, 0), 0)
+
 			
 func setYCellsOnRight():
 	var usedCells: Array[Vector2i] = getFloorCells()
@@ -20,4 +23,6 @@ func setYCellsOnRight():
 	for value in yCells:
 		if value.y > 0:
 			set_cell(Vector2i(value.x, value.y), 0, Vector2i(0, 0), 0)
+			if floor.hasTileOnLeftSide(value):
+				set_cell(Vector2i(value.x + 1, value.y), 0, Vector2i(0, 0), 0)
 			
