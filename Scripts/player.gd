@@ -39,7 +39,7 @@ func _ready():
 
 
 func _physics_process(delta):
-	input(delta)
+	input()
 	bounceOff()
 	getMousePosition()
 	handleSmoothMovement(delta)
@@ -47,7 +47,7 @@ func _physics_process(delta):
 	collision = move_and_collide(velocity * delta)
 	
 
-func input(delta):
+func input():
 	if canCharge():
 		if Input.is_action_pressed("LeftClick"):
 			drawCircle()
@@ -112,7 +112,6 @@ func bounceOff():
 func calulateBounceOffPostition():
 	var collider: Object = collision.get_collider()
 	var bounceStrength: float = collider.get_meta("bounceStrength")  if (collider.has_meta("bounceStrength"))  else 1
-	var reflect = collision.get_remainder().bounce(collision.get_normal())
 	velocity = velocity.bounce(collision.get_normal()) * bounceStrength
 	startPos = self.position
 	

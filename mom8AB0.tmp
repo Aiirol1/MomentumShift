@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://jclxonbb4fdt" path="res://Assets/Wall.png" id="3_66uia"]
 [ext_resource type="Script" path="res://Scripts/wallVertical.gd" id="4_b4bvf"]
 [ext_resource type="Texture2D" uid="uid://dmbq3wlo18vfh" path="res://Assets/Floor.png" id="4_xagkb"]
-[ext_resource type="Script" path="res://Scripts/wallHorizontal.gd" id="6_0jgvn"]
+[ext_resource type="Script" path="res://wallHrizontal.gd" id="6_0jgvn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1ygcb"]
 texture = ExtResource("4_xagkb")
