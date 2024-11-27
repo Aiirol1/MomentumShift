@@ -1,7 +1,7 @@
 extends Ground
 
-var _minBounds:
-var _maxBounds:
+var _minBounds
+var _maxBounds
 var bounds
 
 
