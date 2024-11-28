@@ -80,9 +80,5 @@ value = 50.0
 rounded = true
 show_percentage = false
 
-[node name="Player" parent="." node_paths=PackedStringArray("momentumBar", "futureMomentumBar") instance=ExtResource("1_cko0r")]
+[node name="Player" parent="." instance=ExtResource("1_cko0r")]
 position = Vector2(155, 134)
-momentumBar = NodePath("../GUILayer/MomentumBar")
-futureMomentumBar = NodePath("../GUILayer/FutureMomentumBar")
-
-[connection signal="momentumChanged" from="Player" to="Player" method="_on_momentum_changed"]
