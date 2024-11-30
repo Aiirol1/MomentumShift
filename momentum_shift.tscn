@@ -84,5 +84,3 @@ show_percentage = false
 position = Vector2(155, 134)
 momentumBar = NodePath("../GUILayer/MomentumBar")
 futureMomentumBar = NodePath("../GUILayer/FutureMomentumBar")
-
-[connection signal="momentumChanged" from="Player" to="Player" method="_on_momentum_changed"]
