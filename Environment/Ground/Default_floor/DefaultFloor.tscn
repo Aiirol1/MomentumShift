@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5slifgbpmqxc"]
+
+[ext_resource type="PackedScene" uid="uid://cioocaalo35o7" path="res://Environment/Ground/ground.tscn" id="1_gmir1"]
+[ext_resource type="TileSet" uid="uid://boieqc0jfr0ug" path="res://Environment/Ground/Default_floor/Assets/floor.tres" id="2_m06pt"]
+
+[node name="Default_floor" instance=ExtResource("1_gmir1")]
+tile_set = ExtResource("2_m06pt")

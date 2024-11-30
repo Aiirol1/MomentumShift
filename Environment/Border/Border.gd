@@ -7,6 +7,9 @@ class_name Walls
 func _ready():
 	spawn_wall()
 	
+	for child in get_children():
+		child.set_meta("bounce_strength", get_meta("bounce_strength"))
+	
 func spawn_wall():
 	pass
 
