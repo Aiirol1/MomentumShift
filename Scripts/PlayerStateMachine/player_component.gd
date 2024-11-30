@@ -31,8 +31,8 @@ func hide_circle():
 
 func reset_future_momentum():
 	var tween = get_tree().create_tween()
-	tween.tween_property(parent.futureMomentumBar, "value", parent.momentum, 0.3)
+	tween.tween_property(parent.future_momentum_bar, "value", parent.momentum, 0.3)
 	tween.finished.connect(tween_finished)
 	
 func tween_finished():
-	parent.futureMomentumBar.hide()
+	parent.future_momentum_bar.hide()

@@ -2,13 +2,13 @@ extends State
 
 @export var charging: State
 
-@export var powerArrow: Sprite2D
+@export var power_arrow: Sprite2D
 
 func enter():
 	parent_component.reset_zoom()
 	parent_component.hide_circle()
 	parent_component.reset_future_momentum()
-	powerArrow.hide()
+	power_arrow.hide()
 
 func process_input(_event: InputEvent):
 	if can_change_state_to_charging():

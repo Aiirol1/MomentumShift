@@ -42,45 +42,45 @@ tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_bgp4h")
 
-[node name="MomentumShift" type="Node2D"]
+[node name="Momentum_Shift" type="Node2D"]
 
-[node name="TileMaps" type="Node2D" parent="."]
+[node name="Tile_maps" type="Node2D" parent="."]
 
-[node name="Floor" type="TileMapLayer" parent="TileMaps"]
+[node name="Floor" type="TileMapLayer" parent="Tile_maps"]
 tile_set = SubResource("TileSet_o7yvx")
 rendering_quadrant_size = 32
 script = ExtResource("2_iguiu")
 
-[node name="Walls" type="TileMapLayer" parent="TileMaps"]
+[node name="Walls" type="TileMapLayer" parent="Tile_maps"]
 script = ExtResource("3_1o3v1")
 
-[node name="WallVertical" type="TileMapLayer" parent="TileMaps/Walls" node_paths=PackedStringArray("floor")]
+[node name="Wall_vertical" type="TileMapLayer" parent="Tile_maps/Walls" node_paths=PackedStringArray("floor")]
 tile_set = SubResource("TileSet_l01qd")
 script = ExtResource("4_b4bvf")
 floor = NodePath("../../Floor")
 
-[node name="WallHorizontal" type="TileMapLayer" parent="TileMaps/Walls" node_paths=PackedStringArray("floor")]
+[node name="Wall_horizontal" type="TileMapLayer" parent="Tile_maps/Walls" node_paths=PackedStringArray("floor")]
 tile_set = SubResource("TileSet_8t0w6")
 script = ExtResource("6_0jgvn")
 floor = NodePath("../../Floor")
 
-[node name="GUILayer" type="CanvasLayer" parent="."]
+[node name="GUI_layer" type="CanvasLayer" parent="."]
 
-[node name="MomentumBar" type="ProgressBar" parent="GUILayer"]
+[node name="Momentum_bar" type="ProgressBar" parent="GUI_layer"]
 modulate = Color(0, 0.678431, 1, 1)
 offset_right = 152.0
 offset_bottom = 27.0
 value = 50.0
 rounded = true
 
-[node name="FutureMomentumBar" type="ProgressBar" parent="GUILayer"]
+[node name="Future_momentum_bar" type="ProgressBar" parent="GUI_layer"]
 offset_right = 152.0
 offset_bottom = 27.0
 value = 50.0
 rounded = true
 show_percentage = false
 
-[node name="Player" parent="." node_paths=PackedStringArray("momentumBar", "futureMomentumBar") instance=ExtResource("1_cko0r")]
+[node name="Player" parent="." node_paths=PackedStringArray("momentum_bar", "future_momentum_bar") instance=ExtResource("1_cko0r")]
 position = Vector2(155, 134)
-momentumBar = NodePath("../GUILayer/MomentumBar")
-futureMomentumBar = NodePath("../GUILayer/FutureMomentumBar")
+momentum_bar = NodePath("../GUI_layer/Momentum_bar")
+future_momentum_bar = NodePath("../GUI_layer/Future_momentum_bar")

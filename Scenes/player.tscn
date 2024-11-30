@@ -16,7 +16,7 @@ radius = 16.0312
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_uis4d")
 
-[node name="PlayerImage" type="Sprite2D" parent="."]
+[node name="Player_image" type="Sprite2D" parent="."]
 texture = ExtResource("1_lyds5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -36,10 +36,10 @@ unique_name_in_owner = true
 script = ExtResource("4_x7ei4")
 starting_state = NodePath("idle")
 
-[node name="idle" type="Node" parent="state_machine" node_paths=PackedStringArray("charging", "powerArrow")]
+[node name="idle" type="Node" parent="state_machine" node_paths=PackedStringArray("charging", "power_arrow")]
 script = ExtResource("5_tugsi")
 charging = NodePath("../charging")
-powerArrow = NodePath("../../Power_arrow")
+power_arrow = NodePath("../../Power_arrow")
 
 [node name="charging" type="Node" parent="state_machine" node_paths=PackedStringArray("is_charged", "idle", "power_arrow", "camera")]
 script = ExtResource("5_jusku")
