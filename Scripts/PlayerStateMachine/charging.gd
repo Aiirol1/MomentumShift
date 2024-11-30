@@ -71,4 +71,4 @@ func can_change_state_to_idle() -> bool:
 	return !parent_component.mouse_in_near(parent_component.MOUSE_DISTANCE_BUFFER)
 	
 func can_change_state_to_is_charged() -> bool:
-	return Input.is_action_just_released("LeftClick") and parent_component.mouse_in_near(parent_component.MOUSE_DISTANCE_BUFFER)
+	return Input.is_action_just_released("left_click") and parent_component.mouse_in_near(parent_component.MOUSE_DISTANCE_BUFFER)
