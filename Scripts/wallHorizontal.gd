@@ -7,7 +7,6 @@ func spawnWall():
 	
 
 func setXCellsOnTop():
-	var usedCells: Array[Vector2i] = getFloorCells()
 	var xCells: Array[Vector2i] = floor.getTopTilesYValues()
 	
 	for value in xCells:
@@ -18,7 +17,6 @@ func setXCellsOnTop():
 
 			
 func setXCellsOnGround():
-	var usedCells: Array[Vector2i] = getFloorCells()
 	var xCells: Array[Vector2i] = floor.getGroundTilesYValues()
 	
 	for value in xCells:

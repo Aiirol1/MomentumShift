@@ -4,32 +4,29 @@ extends State
 @export var idle: State
 @export var charging: State
 
-@export var camera: Camera2D
-
-const CAMERA_ZOOM: Vector2 = Vector2(1, 1)
-
 
 func enter():
-	parent.charged_mouse_pos = parent.get_global_mouse_position()
-	reset_zoom()
-	hide_circle()
+	parent_component.charged_mouse_pos = parent_component.get_mouse_position()
+	parent_component.reset_zoom()
+	parent_component.hide_circle()
 	
-func process_input(event: InputEvent):
-	if Input.is_action_just_pressed("RightClick"):
+func process_input(_event: InputEvent):
+	if can_change_state_to_idle():
 		return idle
-	if Input.is_action_just_pressed("Space"):
+	if can_change_state_to_moving():
 		return moving
-	if Input.is_action_pressed("LeftClick") and mouse_in_near(MOUSE_DISTANCE_BUFFER):
+	if can_change_state_to_charging():
 		return charging
 	return null
 	
-func process_frame(delta: float):
-	set_mouse_position()
+func process_frame(_delta: float):
+	parent_component.set_mouse_position()
 
-func hide_circle():
-	parent.queue_redraw()
-	parent.circle_color = Color.TRANSPARENT
+func can_change_state_to_idle() -> bool:
+	return Input.is_action_just_pressed("RightClick")
 	
-func reset_zoom():
-	var tween = get_tree().create_tween()
-	tween.tween_property(camera, "zoom", CAMERA_ZOOM, 0.2)
+func can_change_state_to_moving() -> bool:
+	return Input.is_action_just_pressed("Space")
+	
+func can_change_state_to_charging() -> bool:
+	return Input.is_action_pressed("LeftClick") and parent_component.mouse_in_near(parent_component.MOUSE_DISTANCE_BUFFER)

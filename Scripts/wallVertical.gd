@@ -6,7 +6,6 @@ func spawnWall():
 	setYCellsOnRight()
 
 func setYCellsOnLeft():
-	var usedCells: Array[Vector2i] = getFloorCells()
 	var yCells: Array[Vector2i] = floor.getLeftTilesXValues()
 	
 	for value in yCells:
@@ -17,7 +16,6 @@ func setYCellsOnLeft():
 
 			
 func setYCellsOnRight():
-	var usedCells: Array[Vector2i] = getFloorCells()
 	var yCells: Array[Vector2i] = floor.getRightTilesXValues()
 	
 	for value in yCells:

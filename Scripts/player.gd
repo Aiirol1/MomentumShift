@@ -210,20 +210,26 @@ extends CharacterBody2D
 	#momentum += value
 	#var tween = get_tree().create_tween()
 	#tween.tween_property(momentumBar, "value", momentum, 0.2)
-	#
-	#futureMomentumBar.hide()
 
 @onready var state_machine = %state_machine
+@onready var function_component = %function_component
+
+@export var momentumBar: ProgressBar
+@export var futureMomentumBar: ProgressBar
 
 var circle_color: Color = Color.RED
-var charged_mouse_pos: Vector2
+var momentum: float = 100
+var futureMomentum: float = 100
 
 const MOUSE_DISTANCE_BUFFER: int = 100
+const MAX_MOMENTUM: int = 100
+const MAX_CHARGING_VALUE: int = 4
 
 
 
 func _ready():
-	state_machine.init(self)
+	initMomentumBars()
+	state_machine.init(self, function_component)
 	
 func _unhandled_input(event):
 	state_machine.process_input(event)
@@ -237,3 +243,10 @@ func _process(delta):
 func _draw():
 	var local_position = to_local(global_position)
 	draw_circle(local_position, MOUSE_DISTANCE_BUFFER, circle_color, false, 1, true) ##changing color gets called in states --> calling _draw from there not working
+
+func initMomentumBars():
+	momentumBar.max_value = MAX_MOMENTUM
+	momentumBar.value = MAX_MOMENTUM
+	futureMomentumBar.max_value = MAX_MOMENTUM
+	futureMomentumBar.value = MAX_MOMENTUM
+	futureMomentumBar.hide()

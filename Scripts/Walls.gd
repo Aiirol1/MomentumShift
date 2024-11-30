@@ -1,6 +1,7 @@
 extends TileMapLayer
 class_name Walls
 
+
 @export var floor: TileMapLayer
 
 func _ready():
