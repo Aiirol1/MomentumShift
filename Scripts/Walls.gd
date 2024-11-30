@@ -5,9 +5,9 @@ class_name Walls
 @export var floor: TileMapLayer
 
 func _ready():
-	spawnWall()
+	spawn_wall()
 	
-func spawnWall():
+func spawn_wall():
 	pass
 
 func getFloorCells() -> Array[Vector2i]:

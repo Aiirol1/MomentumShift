@@ -2,13 +2,13 @@ extends State
 
 @export var charging: State
 
-@export var powerArrow: Sprite2D
+@export var power_arrow: Sprite2D
 
 func enter():
 	parent_component.reset_zoom()
 	parent_component.hide_circle()
 	parent_component.reset_future_momentum()
-	powerArrow.hide()
+	power_arrow.hide()
 
 func process_input(_event: InputEvent):
 	if can_change_state_to_charging():
@@ -20,4 +20,4 @@ func process_frame(_delta: float):
 	return null
 	
 func can_change_state_to_charging() -> bool:
-	return Input.is_action_pressed("LeftClick") and parent_component.mouse_in_near(parent_component.MOUSE_DISTANCE_BUFFER) and parent.momentum > 0
+	return Input.is_action_pressed("left_click") and parent_component.mouse_in_near(parent_component.MOUSE_DISTANCE_BUFFER) and parent.momentum > 0

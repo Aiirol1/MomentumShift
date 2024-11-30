@@ -21,8 +21,8 @@ func enter():
 	
 func process_physics(delta: float):
 	collision = parent.move_and_collide(parent.velocity * delta)
-	bounceOff()
-	handleSmoothMovement(delta)
+	bounce_off()
+	handle_smooth_movement(delta)
 	
 	if can_change_state_to_idle():
 		return idle
@@ -31,25 +31,25 @@ func process_physics(delta: float):
 	
 func move():
 	start_pos = parent.position
-	movement = getShootValues()
+	movement = get_shoot_values()
 	power_arrow.hide()
 	#firstShot = false
-	#momentumChanged.emit(-powerArrow.scale.x * MAX_CHARGING_VALUE)
+	#momentumChanged.emit(-power_arrow.scale.x * MAX_CHARGING_VALUE)
 
-func getShootValues() -> Vector2:
+func get_shoot_values() -> Vector2:
 	var newPos: Vector2
-	var xPos = parent.position.x
-	var yPos = parent.position.y
-	newPos.x = xPos - (parent_component.charged_mouse_pos.x - xPos) * 2
-	newPos.y = yPos - (parent_component.charged_mouse_pos.y - yPos) * 2
+	var x_pos = parent.position.x
+	var y_pos = parent.position.y
+	newPos.x = x_pos - (parent_component.charged_mouse_pos.x - x_pos) * 2
+	newPos.y = y_pos - (parent_component.charged_mouse_pos.y - y_pos) * 2
 	
 	return newPos
 	
-func handleSmoothMovement(delta):
-	var totalDistance = start_pos.distance_to(movement)
-	var currentDistance = parent.position.distance_to(start_pos)
+func handle_smooth_movement(delta):
+	var total_distance = start_pos.distance_to(movement)
+	var current_distance = parent.position.distance_to(start_pos)
 
-	if currentDistance >= totalDistance:
+	if current_distance >= total_distance:
 		if parent.velocity.length() > FRICTION * delta:
 			parent.velocity -= parent.velocity.normalized() * FRICTION * delta
 		else:
@@ -60,15 +60,15 @@ func handleSmoothMovement(delta):
 			parent.velocity = parent.position.direction_to(movement) * ACCELERATION
 			parent.velocity = parent.velocity.limit_length(MAX_SPEED)
 
-func bounceOff():
+func bounce_off():
 	if collision:
 		bouncing = true
-		calulateBounceOffPostition()
+		calculate_bounce_off_position()
 		
-func calulateBounceOffPostition():
+func calculate_bounce_off_position():
 	var collider: Object = collision.get_collider()
-	var bounceStrength: float = collider.get_meta("bounceStrength")  if (collider.has_meta("bounceStrength"))  else 1
-	parent.velocity = parent.velocity.bounce(collision.get_normal()) * bounceStrength
+	var bounce_strength: float = collider.get_meta("bounce_strength")  if (collider.has_meta("bounce_strength"))  else 1
+	parent.velocity = parent.velocity.bounce(collision.get_normal()) * bounce_strength
 	start_pos = parent.position
 
 func _on_momentum_changed(value):
@@ -76,7 +76,7 @@ func _on_momentum_changed(value):
 	
 	parent.momentum += value
 	var tween = get_tree().create_tween()
-	tween.tween_property(parent.momentumBar, "value", parent.momentum, 0.2)
+	tween.tween_property(parent.momentum_bar, "value", parent.momentum, 0.2)
 
 func can_change_state_to_idle() -> bool:
 	return parent.velocity == Vector2.ZERO
