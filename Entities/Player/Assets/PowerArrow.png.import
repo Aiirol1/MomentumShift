@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jclxonbb4fdt"
-path="res://.godot/imported/Wall.png-464e521111ad9ffd87bb54acee511680.ctex"
+uid="uid://b3mnda382e4vw"
+path="res://.godot/imported/PowerArrow.png-33f7f035332ff07341e638c6d28ea24f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Wall.png"
-dest_files=["res://.godot/imported/Wall.png-464e521111ad9ffd87bb54acee511680.ctex"]
+source_file="res://Entities/Player/Assets/PowerArrow.png"
+dest_files=["res://.godot/imported/PowerArrow.png-33f7f035332ff07341e638c6d28ea24f.ctex"]
 
 [params]
 

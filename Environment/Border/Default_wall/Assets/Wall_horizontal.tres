@@ -1,0 +1,14 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://f4o2dhw5sapu"]
+
+[ext_resource type="Texture2D" uid="uid://jclxonbb4fdt" path="res://Environment/Border/Default_wall/Assets/Wall.png" id="1_albuo"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bgp4h"]
+texture = ExtResource("1_albuo")
+texture_region_size = Vector2i(32, 32)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, -16, 16, 16, 16, 16, -16)
+
+[resource]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_bgp4h")

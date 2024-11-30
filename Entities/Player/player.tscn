@@ -1,0 +1,62 @@
+[gd_scene load_steps=11 format=3 uid="uid://cyo6jjluneu1g"]
+
+[ext_resource type="PackedScene" uid="uid://d2tdx64nl3l34" path="res://Entities/Entity.tscn" id="1_jo22g"]
+[ext_resource type="Texture2D" uid="uid://danav7imjwb4g" path="res://Entities/Player/Assets/Player.png" id="1_lyds5"]
+[ext_resource type="Script" path="res://Entities/Player/player.gd" id="1_uis4d"]
+[ext_resource type="Texture2D" uid="uid://b3mnda382e4vw" path="res://Entities/Player/Assets/PowerArrow.png" id="3_5mpvn"]
+[ext_resource type="Script" path="res://Entities/Player/Player_states/charging.gd" id="5_jusku"]
+[ext_resource type="Script" path="res://Entities/Player/Player_states/idle.gd" id="5_tugsi"]
+[ext_resource type="Script" path="res://Entities/Player/Player_states/is_charged.gd" id="7_pet0m"]
+[ext_resource type="Script" path="res://Entities/Player/Player_states/moving.gd" id="8_5svrn"]
+[ext_resource type="Script" path="res://Entities/Player/Player_states/player_component.gd" id="9_qou8h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6cvar"]
+radius = 16.1245
+
+[node name="Player" instance=ExtResource("1_jo22g")]
+script = ExtResource("1_uis4d")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("1_lyds5")
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_6cvar")
+
+[node name="Power_arrow" type="Sprite2D" parent="." index="2"]
+texture = ExtResource("3_5mpvn")
+flip_h = true
+region_rect = Rect2(0, 9, 32, 14)
+
+[node name="Camera2D" type="Camera2D" parent="." index="3"]
+position_smoothing_enabled = true
+
+[node name="state_machine" parent="." index="4" node_paths=PackedStringArray("starting_state")]
+starting_state = NodePath("idle")
+
+[node name="idle" type="Node" parent="state_machine" index="0" node_paths=PackedStringArray("charging", "power_arrow")]
+script = ExtResource("5_tugsi")
+charging = NodePath("../charging")
+power_arrow = NodePath("../../Power_arrow")
+
+[node name="charging" type="Node" parent="state_machine" index="1" node_paths=PackedStringArray("is_charged", "idle", "power_arrow", "camera")]
+script = ExtResource("5_jusku")
+is_charged = NodePath("../Is_charged")
+idle = NodePath("../idle")
+power_arrow = NodePath("../../Power_arrow")
+camera = NodePath("../../Camera2D")
+
+[node name="Is_charged" type="Node" parent="state_machine" index="2" node_paths=PackedStringArray("moving", "idle", "charging")]
+script = ExtResource("7_pet0m")
+moving = NodePath("../Moving")
+idle = NodePath("../idle")
+charging = NodePath("../charging")
+
+[node name="Moving" type="Node" parent="state_machine" index="3" node_paths=PackedStringArray("idle", "power_arrow")]
+script = ExtResource("8_5svrn")
+idle = NodePath("../idle")
+power_arrow = NodePath("../../Power_arrow")
+
+[node name="function_component" parent="." index="5" node_paths=PackedStringArray("parent", "camera")]
+script = ExtResource("9_qou8h")
+parent = NodePath("..")
+camera = NodePath("../Camera2D")

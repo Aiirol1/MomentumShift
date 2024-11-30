@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0rdfkx3y0btb"]
+
+[ext_resource type="PackedScene" uid="uid://d2tdx64nl3l34" path="res://Entities/Entity.tscn" id="1_6sxo4"]
+[ext_resource type="Script" path="res://Entities/Enemies/enemy_states/move.gd" id="2_xupcg"]
+[ext_resource type="Script" path="res://Entities/Enemies/enemy_states/attack.gd" id="3_o0yvk"]
+[ext_resource type="Script" path="res://Entities/Enemies/enemy_states/hit.gd" id="4_ibh83"]
+
+[node name="Enemy" instance=ExtResource("1_6sxo4")]
+
+[node name="move" type="Node" parent="state_machine" index="0"]
+script = ExtResource("2_xupcg")
+
+[node name="attack" type="Node" parent="state_machine" index="1"]
+script = ExtResource("3_o0yvk")
+
+[node name="hit" type="Node" parent="state_machine" index="2"]
+script = ExtResource("4_ibh83")

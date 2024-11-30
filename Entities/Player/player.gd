@@ -1,7 +1,9 @@
 extends CharacterBody2D
 
+
 @onready var state_machine = %state_machine
 @onready var function_component = %function_component
+
 
 @export var momentum_bar: ProgressBar
 @export var future_momentum_bar: ProgressBar

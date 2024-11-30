@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bx3tvji85sh1n"]
+
+[ext_resource type="Script" path="res://Environment/Border/Border.gd" id="1_dso7v"]
+[ext_resource type="Script" path="res://Environment/Border/Default_wall/wall_vertical.gd" id="3_ici3y"]
+[ext_resource type="Script" path="res://Environment/Border/Default_wall/wall_horizontal.gd" id="4_ydex5"]
+
+[node name="Border" type="TileMapLayer"]
+script = ExtResource("1_dso7v")
+metadata/bounce_strength = 0.0
+
+[node name="Wall_vertical" type="TileMapLayer" parent="."]
+script = ExtResource("3_ici3y")
+metadata/bounce_strength = 0.0
+
+[node name="Wall_horizontal" type="TileMapLayer" parent="."]
+script = ExtResource("4_ydex5")
+metadata/bounce_strength = 0.0

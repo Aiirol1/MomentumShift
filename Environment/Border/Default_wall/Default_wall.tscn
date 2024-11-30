@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccp43fisu8aek"]
+
+[ext_resource type="PackedScene" uid="uid://bx3tvji85sh1n" path="res://Environment/Border/Border.tscn" id="1_ow8n6"]
+[ext_resource type="TileSet" uid="uid://lyjbhj3ky4b3" path="res://Environment/Border/Default_wall/Assets/Wall_vertical.tres" id="2_tdq0a"]
+[ext_resource type="TileSet" uid="uid://f4o2dhw5sapu" path="res://Environment/Border/Default_wall/Assets/Wall_horizontal.tres" id="3_513v6"]
+
+[node name="Default_wall" instance=ExtResource("1_ow8n6")]
+metadata/bounce_strength = 0.5
+
+[node name="Wall_vertical" parent="." index="0"]
+tile_set = ExtResource("2_tdq0a")
+
+[node name="Wall_horizontal" parent="." index="1"]
+tile_set = ExtResource("3_513v6")

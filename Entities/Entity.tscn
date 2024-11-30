@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2tdx64nl3l34"]
+
+[ext_resource type="Script" path="res://Common/state_machine/StateMachine.gd" id="1_5omoh"]
+
+[node name="Entity" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="state_machine" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_5omoh")
+
+[node name="function_component" type="Node" parent="."]
+unique_name_in_owner = true
