@@ -1,9 +1,4 @@
-extends CharacterBody2D
-
-
-@onready var state_machine = %state_machine
-@onready var function_component = %function_component
-
+extends entity
 
 @export var momentum_bar: ProgressBar
 @export var future_momentum_bar: ProgressBar
@@ -14,22 +9,10 @@ var future_momentum: float = 100
 
 const MOUSE_DISTANCE_BUFFER: int = 100
 const MAX_MOMENTUM: int = 100
-const MAX_CHARGING_VALUE: int = 4
-
-
 
 func _ready():
+	super()
 	init_momentum_bars()
-	state_machine.init(self, function_component)
-	
-func _unhandled_input(event):
-	state_machine.process_input(event)
-	
-func _physics_process(delta):
-	state_machine.process_physics(delta)
-	
-func _process(delta):
-	state_machine.process_frame(delta)
 	
 func _draw():
 	var local_position = to_local(global_position)

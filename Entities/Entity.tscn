@@ -3,6 +3,8 @@
 [ext_resource type="Script" path="res://Common/state_machine/StateMachine.gd" id="1_5omoh"]
 
 [node name="Entity" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 

@@ -1,4 +1,5 @@
-extends Node
+extends State
+class_name enemy_hit
 
 
 # Called when the node enters the scene tree for the first time.
