@@ -21,7 +21,7 @@ func enter():
 	
 func process_physics(delta: float):
 	collision = parent.move_and_collide(parent.velocity * delta)
-	bounceOff()
+	bounce_off()
 	handle_smooth_movement(delta)
 	
 	if can_change_state_to_idle():
@@ -60,7 +60,7 @@ func handle_smooth_movement(delta):
 			parent.velocity = parent.position.direction_to(movement) * ACCELERATION
 			parent.velocity = parent.velocity.limit_length(MAX_SPEED)
 
-func bounceOff():
+func bounce_off():
 	if collision:
 		bouncing = true
 		calculate_bounce_off_position()
