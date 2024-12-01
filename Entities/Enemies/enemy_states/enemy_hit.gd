@@ -1,12 +1,29 @@
 extends State
 class_name enemy_hit
 
+@export var move: State
+@export var die: State
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+@onready var hit_cooldown = %Hit_cooldown
 
+var can_take_damage: bool = true
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func enter():
+	super()
+	
+func process_frame(_delta: float):
+	if can_take_damage:
+		take_damage()
+	
+	var lives = parent.resource.lives
+	if lives > 0:
+		return move
+	return die
+	
+func take_damage():
+	parent.resource.lives -= 1
+	can_take_damage = false
+	hit_cooldown.start()
+	
+func _on_hit_cooldown_timeout():
+	can_take_damage = true

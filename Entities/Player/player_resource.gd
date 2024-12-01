@@ -1,0 +1,2 @@
+extends Entity_resource
+class_name Player_resource

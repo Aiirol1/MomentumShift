@@ -3,6 +3,8 @@ extends State
 @export var moving: State
 @export var idle: State
 @export var charging: State
+@export var hit: State
+
 
 
 func enter():

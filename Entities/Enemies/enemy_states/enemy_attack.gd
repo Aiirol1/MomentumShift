@@ -1,11 +1,7 @@
 extends State
 class_name enemy_attack
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+@onready var player_detector = %Player_detector
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func process_frame(_delta: float):
 	pass

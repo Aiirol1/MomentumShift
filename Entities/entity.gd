@@ -1,10 +1,15 @@
 extends CharacterBody2D
 class_name entity
 
+@export var resource: Resource
+
 @onready var state_machine = %state_machine
 @onready var function_component = %function_component
 
+var lives: int
+
 func _ready():
+	lives = resource.lives
 	state_machine.init(self, function_component)
 	
 func _unhandled_input(event):

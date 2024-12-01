@@ -1,0 +1,2 @@
+extends Enemy_resource
+class_name Inspector_Resource

@@ -1,8 +1,10 @@
 extends State
 
 @export var charging: State
+@export var hit: State
 
 @export var power_arrow: Sprite2D
+
 
 func enter():
 	parent_component.reset_zoom()

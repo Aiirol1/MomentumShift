@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Player_resource" load_steps=2 format=3 uid="uid://n1x535wq55m7"]
+
+[ext_resource type="Script" path="res://Entities/Player/player_resource.gd" id="1_v0fh6"]
+
+[resource]
+script = ExtResource("1_v0fh6")
+lives = 5
+name = "Player"

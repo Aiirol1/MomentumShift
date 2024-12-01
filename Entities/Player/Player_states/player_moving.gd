@@ -1,6 +1,8 @@
 extends State
 
 @export var idle: State
+@export var hit: State
+
 
 @export var power_arrow: Sprite2D
 
@@ -14,8 +16,9 @@ const MAX_SPEED: int = 800
 const ACCELERATION: int = 500
 const MAX_CHARGING_VALUE: int = 4
 
+
 func enter():
-	_on_momentum_changed(-power_arrow.scale.x * MAX_CHARGING_VALUE)
+	parent_component._on_momentum_changed(-power_arrow.scale.x * MAX_CHARGING_VALUE)
 	parent_component.reset_future_momentum()
 	move()
 	
@@ -71,12 +74,7 @@ func calculate_bounce_off_position():
 	parent.velocity = parent.velocity.bounce(collision.get_normal()) * bounce_strength
 	start_pos = parent.position
 
-func _on_momentum_changed(value):
-	value = -1 if (value > -1) else value
-	
-	parent.momentum += value
-	var tween = get_tree().create_tween()
-	tween.tween_property(parent.momentum_bar, "value", parent.momentum, 0.2)
+
 
 func can_change_state_to_idle() -> bool:
 	return parent.velocity == Vector2.ZERO
