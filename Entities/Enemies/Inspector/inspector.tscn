@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://byaej8aqgi16"]
+[gd_scene load_steps=14 format=3 uid="uid://byaej8aqgi16"]
 
 [ext_resource type="PackedScene" uid="uid://d0rdfkx3y0btb" path="res://Entities/Enemies/Enemy.tscn" id="1_i3r7j"]
 [ext_resource type="Texture2D" uid="uid://bmqdnageli0bp" path="res://Entities/Enemies/Inspector/Assets/Inspector.png" id="2_au1iv"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Entities/Enemies/Inspector/Inspector_states/inspector_attack.gd" id="5_wxnm5"]
 [ext_resource type="Script" path="res://Entities/Enemies/Inspector/Inspector_states/inspector_hit.gd" id="6_qf34c"]
 [ext_resource type="Script" path="res://Entities/Enemies/Inspector/Inspector_states/inspector_die.gd" id="8_323gv"]
+[ext_resource type="Animation" uid="uid://b52ow6s6k2rb7" path="res://Entities/Enemies/Inspector/Animations/die.res" id="9_d8omp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_00fsv"]
 radius = 16.0
@@ -15,8 +16,40 @@ radius = 16.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_64pnm"]
 radius = 20.0998
 
+[sub_resource type="Animation" id="Animation_0iq7y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6xxo5"]
+_data = {
+"RESET": SubResource("Animation_0iq7y"),
+"die": ExtResource("9_d8omp")
+}
+
 [node name="Inspector" instance=ExtResource("1_i3r7j")]
-collision_mask = 7
 script = ExtResource("2_c755v")
 resource = ExtResource("3_ucsgu")
 
@@ -46,3 +79,8 @@ target_position = Vector2(0, 32)
 
 [node name="CollisionShape2D" parent="Hit_area" index="0"]
 shape = SubResource("CircleShape2D_64pnm")
+
+[node name="AnimationPlayer" parent="." index="10"]
+libraries = {
+"": SubResource("AnimationLibrary_6xxo5")
+}

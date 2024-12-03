@@ -7,6 +7,10 @@
 [ext_resource type="Script" path="res://Entities/Enemies/enemy_states/enemy_die.gd" id="5_ydglw"]
 
 [node name="Enemy" instance=ExtResource("1_6sxo4")]
+collision_mask = 7
+
+[node name="CollisionShape2D" parent="." index="1"]
+unique_name_in_owner = true
 
 [node name="state_machine" parent="." index="2" node_paths=PackedStringArray("starting_state")]
 starting_state = NodePath("move")
@@ -16,8 +20,10 @@ script = ExtResource("2_xupcg")
 attack = NodePath("../attack")
 hit = NodePath("../hit")
 
-[node name="attack" type="Node" parent="state_machine" index="1"]
+[node name="attack" type="Node" parent="state_machine" index="1" node_paths=PackedStringArray("move", "die")]
 script = ExtResource("3_o0yvk")
+move = NodePath("../move")
+die = NodePath("../die")
 
 [node name="hit" type="Node" parent="state_machine" index="2" node_paths=PackedStringArray("move", "die")]
 script = ExtResource("4_ibh83")
@@ -42,11 +48,17 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hit_area" index="0"]
 
-[node name="Attack_cooldown" type="Timer" parent="." index="7"]
-
-[node name="Hit_cooldown" type="Timer" parent="." index="8"]
+[node name="Hit_cooldown" type="Timer" parent="." index="7"]
 unique_name_in_owner = true
 wait_time = 0.1
 
+[node name="Attack_cooldown" type="Timer" parent="." index="8"]
+unique_name_in_owner = true
+
+[node name="Invincible_cooldown" type="Timer" parent="." index="9"]
+unique_name_in_owner = true
+
 [connection signal="body_exited" from="Hit_area" to="state_machine/move" method="_on_hit_area_body_exited"]
 [connection signal="timeout" from="Hit_cooldown" to="state_machine/hit" method="_on_hit_cooldown_timeout"]
+[connection signal="timeout" from="Attack_cooldown" to="state_machine/move" method="_on_attack_cooldown_timeout"]
+[connection signal="timeout" from="Invincible_cooldown" to="state_machine/move" method="_on_invincible_cooldown_timeout"]

@@ -4,7 +4,7 @@ class_name enemy_hit
 @export var move: State
 @export var die: State
 
-@onready var hit_cooldown = %Hit_cooldown
+@onready var hit_cooldown: Timer = %Hit_cooldown
 
 var can_take_damage: bool = true
 

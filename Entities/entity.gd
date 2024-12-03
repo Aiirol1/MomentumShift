@@ -5,12 +5,13 @@ class_name entity
 
 @onready var state_machine = %state_machine
 @onready var function_component = %function_component
+@onready var animation_player = %AnimationPlayer
 
 var lives: int
 
 func _ready():
 	lives = resource.lives
-	state_machine.init(self, function_component)
+	state_machine.init(self, function_component, animation_player)
 	
 func _unhandled_input(event):
 	state_machine.process_input(event)

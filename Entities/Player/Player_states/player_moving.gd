@@ -1,7 +1,6 @@
 extends State
 
 @export var idle: State
-@export var hit: State
 
 
 @export var power_arrow: Sprite2D
@@ -20,6 +19,7 @@ const MAX_CHARGING_VALUE: int = 4
 func enter():
 	parent_component._on_momentum_changed(-power_arrow.scale.x * MAX_CHARGING_VALUE)
 	parent_component.reset_future_momentum()
+
 	move()
 	
 func process_physics(delta: float):
@@ -36,8 +36,6 @@ func move():
 	start_pos = parent.position
 	movement = get_shoot_values()
 	power_arrow.hide()
-	#firstShot = false
-	#momentumChanged.emit(-power_arrow.scale.x * MAX_CHARGING_VALUE)
 
 func get_shoot_values() -> Vector2:
 	var newPos: Vector2

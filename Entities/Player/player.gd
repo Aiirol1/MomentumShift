@@ -30,4 +30,5 @@ func init_momentum_bars():
 	future_momentum_bar.hide()
 
 func on_hit(damage: int):
-	%state_machine.current_state = %state_machine/hit
+	animation_player.play("flash")
+	state_machine.current_state = %state_machine/hit

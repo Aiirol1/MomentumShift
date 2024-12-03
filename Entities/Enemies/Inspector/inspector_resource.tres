@@ -6,5 +6,7 @@
 script = ExtResource("1_cf5pa")
 speed = 150
 damage = 10
-lives = 3
+attack_cooldown = 1.5
+invincible_cooldown = 2.0
+lives = 1
 name = "Inspector"
