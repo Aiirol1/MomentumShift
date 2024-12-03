@@ -1,9 +1,5 @@
-extends CharacterBody2D
-
-
-@onready var state_machine = %state_machine
-@onready var function_component = %function_component
-
+extends entity
+class_name Player
 
 @export var momentum_bar: ProgressBar
 @export var future_momentum_bar: ProgressBar
@@ -14,22 +10,13 @@ var future_momentum: float = 100
 
 const MOUSE_DISTANCE_BUFFER: int = 100
 const MAX_MOMENTUM: int = 100
-const MAX_CHARGING_VALUE: int = 4
 
-
+signal got_hit(damage: int)
 
 func _ready():
+	super()
+	connect("got_hit", on_hit)
 	init_momentum_bars()
-	state_machine.init(self, function_component)
-	
-func _unhandled_input(event):
-	state_machine.process_input(event)
-	
-func _physics_process(delta):
-	state_machine.process_physics(delta)
-	
-func _process(delta):
-	state_machine.process_frame(delta)
 	
 func _draw():
 	var local_position = to_local(global_position)
@@ -41,3 +28,7 @@ func init_momentum_bars():
 	future_momentum_bar.max_value = MAX_MOMENTUM
 	future_momentum_bar.value = MAX_MOMENTUM
 	future_momentum_bar.hide()
+
+func on_hit(damage: int):
+	animation_player.play("flash")
+	state_machine.current_state = %state_machine/hit

@@ -1,23 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://cjim5aniugmvh"]
+[gd_scene load_steps=5 format=3 uid="uid://cjim5aniugmvh"]
 
 [ext_resource type="PackedScene" uid="uid://cyo6jjluneu1g" path="res://Entities/Player/player.tscn" id="1_cko0r"]
 [ext_resource type="PackedScene" uid="uid://c5slifgbpmqxc" path="res://Environment/Ground/Default_floor/DefaultFloor.tscn" id="1_e6qdv"]
 [ext_resource type="PackedScene" uid="uid://ccp43fisu8aek" path="res://Environment/Border/Default_wall/Default_wall.tscn" id="2_ib5eh"]
+[ext_resource type="PackedScene" uid="uid://byaej8aqgi16" path="res://Entities/Enemies/Inspector/inspector.tscn" id="3_nqkhu"]
 
 [node name="Momentum_Shift" type="Node2D"]
-
-[node name="Tile_maps" type="Node2D" parent="."]
-
-[node name="Default_floor" parent="Tile_maps" instance=ExtResource("1_e6qdv")]
-
-[node name="Default_wall" parent="Tile_maps" node_paths=PackedStringArray("floor") instance=ExtResource("2_ib5eh")]
-floor = NodePath("../Default_floor")
-
-[node name="Wall_vertical" parent="Tile_maps/Default_wall" index="0" node_paths=PackedStringArray("floor")]
-floor = NodePath("../../Default_floor")
-
-[node name="Wall_horizontal" parent="Tile_maps/Default_wall" index="1" node_paths=PackedStringArray("floor")]
-floor = NodePath("../../Default_floor")
 
 [node name="GUI_layer" type="CanvasLayer" parent="."]
 
@@ -35,9 +23,27 @@ value = 50.0
 rounded = true
 show_percentage = false
 
+[node name="Tile_maps" type="Node2D" parent="."]
+
+[node name="Default_floor" parent="Tile_maps" instance=ExtResource("1_e6qdv")]
+
+[node name="Default_wall" parent="Tile_maps" node_paths=PackedStringArray("floor") instance=ExtResource("2_ib5eh")]
+floor = NodePath("../Default_floor")
+
+[node name="Wall_vertical" parent="Tile_maps/Default_wall" index="0" node_paths=PackedStringArray("floor")]
+floor = NodePath("../../Default_floor")
+
+[node name="Wall_horizontal" parent="Tile_maps/Default_wall" index="1" node_paths=PackedStringArray("floor")]
+floor = NodePath("../../Default_floor")
+
 [node name="Player" parent="." node_paths=PackedStringArray("momentum_bar", "future_momentum_bar") instance=ExtResource("1_cko0r")]
-position = Vector2(155, 134)
+position = Vector2(217, 135)
 momentum_bar = NodePath("../GUI_layer/Momentum_bar")
 future_momentum_bar = NodePath("../GUI_layer/Future_momentum_bar")
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Inspector" parent="Enemies" instance=ExtResource("3_nqkhu")]
+position = Vector2(266, 136)
 
 [editable path="Tile_maps/Default_wall"]

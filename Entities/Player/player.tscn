@@ -1,22 +1,43 @@
-[gd_scene load_steps=11 format=3 uid="uid://cyo6jjluneu1g"]
+[gd_scene load_steps=18 format=3 uid="uid://cyo6jjluneu1g"]
 
 [ext_resource type="PackedScene" uid="uid://d2tdx64nl3l34" path="res://Entities/Entity.tscn" id="1_jo22g"]
 [ext_resource type="Texture2D" uid="uid://danav7imjwb4g" path="res://Entities/Player/Assets/Player.png" id="1_lyds5"]
 [ext_resource type="Script" path="res://Entities/Player/player.gd" id="1_uis4d"]
+[ext_resource type="Shader" path="res://Entities/Player/player.gdshader" id="2_d6sxo"]
 [ext_resource type="Texture2D" uid="uid://b3mnda382e4vw" path="res://Entities/Player/Assets/PowerArrow.png" id="3_5mpvn"]
-[ext_resource type="Script" path="res://Entities/Player/Player_states/charging.gd" id="5_jusku"]
-[ext_resource type="Script" path="res://Entities/Player/Player_states/idle.gd" id="5_tugsi"]
-[ext_resource type="Script" path="res://Entities/Player/Player_states/is_charged.gd" id="7_pet0m"]
-[ext_resource type="Script" path="res://Entities/Player/Player_states/moving.gd" id="8_5svrn"]
+[ext_resource type="Resource" uid="uid://n1x535wq55m7" path="res://Entities/Player/player_resource.tres" id="3_xbxuj"]
+[ext_resource type="Script" path="res://Entities/Player/Player_states/player_charging.gd" id="5_jusku"]
+[ext_resource type="Script" path="res://Entities/Player/Player_states/player_idle.gd" id="5_tugsi"]
+[ext_resource type="Script" path="res://Entities/Player/Player_states/player_is_charged.gd" id="7_pet0m"]
+[ext_resource type="Script" path="res://Entities/Player/Player_states/player_moving.gd" id="8_5svrn"]
 [ext_resource type="Script" path="res://Entities/Player/Player_states/player_component.gd" id="9_qou8h"]
+[ext_resource type="Script" path="res://Entities/Player/Player_states/player_hit.gd" id="10_pkf3t"]
+[ext_resource type="Animation" uid="uid://us8fpp0eclps" path="res://Entities/Player/Animations/flash.res" id="13_lphw1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ickyu"]
+shader = ExtResource("2_d6sxo")
+shader_parameter/active = false
+shader_parameter/flash_color = Color(1, 1, 1, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6cvar"]
 radius = 16.1245
 
+[sub_resource type="Animation" id="Animation_w8m03"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_crxaq"]
+_data = {
+"RESET": SubResource("Animation_w8m03"),
+"flash": ExtResource("13_lphw1")
+}
+
 [node name="Player" instance=ExtResource("1_jo22g")]
+collision_layer = 4
 script = ExtResource("1_uis4d")
+resource = ExtResource("3_xbxuj")
 
 [node name="Sprite2D" parent="." index="0"]
+material = SubResource("ShaderMaterial_ickyu")
 texture = ExtResource("1_lyds5")
 
 [node name="CollisionShape2D" parent="." index="1"]
@@ -33,30 +54,44 @@ position_smoothing_enabled = true
 [node name="state_machine" parent="." index="4" node_paths=PackedStringArray("starting_state")]
 starting_state = NodePath("idle")
 
-[node name="idle" type="Node" parent="state_machine" index="0" node_paths=PackedStringArray("charging", "power_arrow")]
+[node name="idle" type="Node" parent="state_machine" index="0" node_paths=PackedStringArray("charging", "hit", "power_arrow")]
 script = ExtResource("5_tugsi")
 charging = NodePath("../charging")
+hit = NodePath("../hit")
 power_arrow = NodePath("../../Power_arrow")
 
-[node name="charging" type="Node" parent="state_machine" index="1" node_paths=PackedStringArray("is_charged", "idle", "power_arrow", "camera")]
+[node name="charging" type="Node" parent="state_machine" index="1" node_paths=PackedStringArray("is_charged", "idle", "hit", "power_arrow", "camera")]
 script = ExtResource("5_jusku")
 is_charged = NodePath("../Is_charged")
 idle = NodePath("../idle")
+hit = NodePath("../hit")
 power_arrow = NodePath("../../Power_arrow")
 camera = NodePath("../../Camera2D")
 
-[node name="Is_charged" type="Node" parent="state_machine" index="2" node_paths=PackedStringArray("moving", "idle", "charging")]
+[node name="Is_charged" type="Node" parent="state_machine" index="2" node_paths=PackedStringArray("moving", "idle", "charging", "hit")]
 script = ExtResource("7_pet0m")
 moving = NodePath("../Moving")
 idle = NodePath("../idle")
 charging = NodePath("../charging")
+hit = NodePath("../hit")
 
 [node name="Moving" type="Node" parent="state_machine" index="3" node_paths=PackedStringArray("idle", "power_arrow")]
 script = ExtResource("8_5svrn")
 idle = NodePath("../idle")
 power_arrow = NodePath("../../Power_arrow")
 
+[node name="hit" type="Node" parent="state_machine" index="4" node_paths=PackedStringArray("idle")]
+script = ExtResource("10_pkf3t")
+idle = NodePath("../idle")
+
 [node name="function_component" parent="." index="5" node_paths=PackedStringArray("parent", "camera")]
 script = ExtResource("9_qou8h")
 parent = NodePath("..")
 camera = NodePath("../Camera2D")
+
+[node name="AnimationPlayer" parent="." index="6"]
+libraries = {
+"": SubResource("AnimationLibrary_crxaq")
+}
+
+[connection signal="got_hit" from="." to="state_machine/hit" method="_on_player_got_hit"]

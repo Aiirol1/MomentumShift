@@ -1,17 +1,64 @@
-[gd_scene load_steps=5 format=3 uid="uid://d0rdfkx3y0btb"]
+[gd_scene load_steps=6 format=3 uid="uid://d0rdfkx3y0btb"]
 
 [ext_resource type="PackedScene" uid="uid://d2tdx64nl3l34" path="res://Entities/Entity.tscn" id="1_6sxo4"]
-[ext_resource type="Script" path="res://Entities/Enemies/enemy_states/move.gd" id="2_xupcg"]
-[ext_resource type="Script" path="res://Entities/Enemies/enemy_states/attack.gd" id="3_o0yvk"]
-[ext_resource type="Script" path="res://Entities/Enemies/enemy_states/hit.gd" id="4_ibh83"]
+[ext_resource type="Script" path="res://Entities/Enemies/enemy_states/enemy_move.gd" id="2_xupcg"]
+[ext_resource type="Script" path="res://Entities/Enemies/enemy_states/enemy_attack.gd" id="3_o0yvk"]
+[ext_resource type="Script" path="res://Entities/Enemies/enemy_states/enemy_hit.gd" id="4_ibh83"]
+[ext_resource type="Script" path="res://Entities/Enemies/enemy_states/enemy_die.gd" id="5_ydglw"]
 
 [node name="Enemy" instance=ExtResource("1_6sxo4")]
+collision_mask = 7
 
-[node name="move" type="Node" parent="state_machine" index="0"]
+[node name="CollisionShape2D" parent="." index="1"]
+unique_name_in_owner = true
+
+[node name="state_machine" parent="." index="2" node_paths=PackedStringArray("starting_state")]
+starting_state = NodePath("move")
+
+[node name="move" type="Node" parent="state_machine" index="0" node_paths=PackedStringArray("attack", "hit")]
 script = ExtResource("2_xupcg")
+attack = NodePath("../attack")
+hit = NodePath("../hit")
 
-[node name="attack" type="Node" parent="state_machine" index="1"]
+[node name="attack" type="Node" parent="state_machine" index="1" node_paths=PackedStringArray("move", "die")]
 script = ExtResource("3_o0yvk")
+move = NodePath("../move")
+die = NodePath("../die")
 
-[node name="hit" type="Node" parent="state_machine" index="2"]
+[node name="hit" type="Node" parent="state_machine" index="2" node_paths=PackedStringArray("move", "die")]
 script = ExtResource("4_ibh83")
+move = NodePath("../move")
+die = NodePath("../die")
+
+[node name="die" type="Node" parent="state_machine" index="3"]
+script = ExtResource("5_ydglw")
+
+[node name="Wall_detector" type="RayCast2D" parent="." index="4"]
+unique_name_in_owner = true
+
+[node name="Player_detector" type="RayCast2D" parent="." index="5"]
+unique_name_in_owner = true
+collision_mask = 4
+hit_from_inside = true
+
+[node name="Hit_area" type="Area2D" parent="." index="6"]
+unique_name_in_owner = true
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hit_area" index="0"]
+
+[node name="Hit_cooldown" type="Timer" parent="." index="7"]
+unique_name_in_owner = true
+wait_time = 0.1
+
+[node name="Attack_cooldown" type="Timer" parent="." index="8"]
+unique_name_in_owner = true
+
+[node name="Invincible_cooldown" type="Timer" parent="." index="9"]
+unique_name_in_owner = true
+
+[connection signal="body_exited" from="Hit_area" to="state_machine/move" method="_on_hit_area_body_exited"]
+[connection signal="timeout" from="Hit_cooldown" to="state_machine/hit" method="_on_hit_cooldown_timeout"]
+[connection signal="timeout" from="Attack_cooldown" to="state_machine/move" method="_on_attack_cooldown_timeout"]
+[connection signal="timeout" from="Invincible_cooldown" to="state_machine/move" method="_on_invincible_cooldown_timeout"]

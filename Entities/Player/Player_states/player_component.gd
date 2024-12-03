@@ -36,3 +36,10 @@ func reset_future_momentum():
 	
 func tween_finished():
 	parent.future_momentum_bar.hide()
+
+func _on_momentum_changed(value):
+	value = -1 if (value > -1) else value
+	
+	parent.momentum += value
+	var tween = get_tree().create_tween()
+	tween.tween_property(parent.momentum_bar, "value", parent.momentum, 0.2)

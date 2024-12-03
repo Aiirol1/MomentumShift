@@ -1,16 +1,13 @@
-extends CharacterBody2D
+extends entity
 class_name enemy
 
-@onready var state_machine = %state_machine
-@onready var function_component = %function_component
+var speed: int
 
-var lives: int:
-	set(value):
-		lives = value
+@onready var attack_cooldown: Timer = %Attack_cooldown
+@onready var invincible_cooldown: Timer = %Invincible_cooldown
 
 func _ready():
-	state_machine.init(self, function_component)
-
-
-func _process(delta):
-	pass
+	super()
+	speed = resource.speed
+	attack_cooldown.wait_time = resource.attack_cooldown
+	invincible_cooldown.wait_time = resource.invincible_cooldown

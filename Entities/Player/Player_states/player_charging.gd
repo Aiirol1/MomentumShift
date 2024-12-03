@@ -2,6 +2,8 @@ extends State
 
 @export var is_charged: State
 @export var idle: State
+@export var hit: State
+
 
 @export var power_arrow: Sprite2D
 @export var camera: Camera2D
@@ -10,6 +12,7 @@ var circle_color = Color(Color.RED)
 
 const MAX_CHARGING_VALUE: int = 4
 const CAMERA_ZOOM: Vector2 = Vector2(1, 1)
+
 
 func enter():
 	power_arrow.show()
@@ -63,7 +66,7 @@ func show_future_momentum(value: float):
 	parent.future_momentum = parent.future_momentum_bar.value
 	parent.future_momentum_bar.show()
 	
-	value = 1 if (value < 1) else value
+	value = 1 if (value < 1) else value ##at least 1
 	parent.future_momentum_bar.value = parent.future_momentum_bar.value - int(value)
 	parent.future_momentum = parent.future_momentum - value
 
