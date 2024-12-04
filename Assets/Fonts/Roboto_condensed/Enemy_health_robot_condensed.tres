@@ -1,0 +1,10 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://mocr45yi7vav"]
+
+[ext_resource type="FontFile" uid="uid://do01oihrpw3au" path="res://Assets/Fonts/Roboto_condensed/RobotoCondensed-Regular.ttf" id="1_2hluf"]
+
+[resource]
+font = ExtResource("1_2hluf")
+font_size = 14
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 1)

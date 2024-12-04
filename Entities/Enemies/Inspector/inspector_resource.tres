@@ -8,5 +8,5 @@ speed = 150
 damage = 10
 attack_cooldown = 1.5
 invincible_cooldown = 2.0
-lives = 1
+lives = 3
 name = "Inspector"
