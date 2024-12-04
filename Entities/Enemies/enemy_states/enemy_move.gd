@@ -7,6 +7,7 @@ class_name enemy_move
 @onready var collision_shape_2d: CollisionShape2D = %CollisionShape2D
 @onready var attack_cooldown: Timer = %Attack_cooldown
 @onready var invincible_cooldown: Timer = %Invincible_cooldown
+@onready var health_hud: CanvasLayer = %Health_HUD
 
 @export var attack: State
 @export var hit: State
@@ -17,6 +18,7 @@ func process_physics(delta: float):
 	parent.move_and_collide(parent.velocity * delta)
 	move_direction(delta)
 	change_direction()
+	move_health_HUD()
 	
 	if !invincible_cooldown.is_stopped():
 		parent.modulate = Color8(0, 0, 255, 255)
@@ -61,6 +63,8 @@ func _on_hit_area_body_exited(body):
 	if body is Player:
 		player_left_hit_area = true
 
+func move_health_HUD():
+	health_hud.offset = Vector2(parent.global_position.x, parent.global_position.y)
 
 func _on_attack_cooldown_timeout():
 	player_detector.enabled = true
