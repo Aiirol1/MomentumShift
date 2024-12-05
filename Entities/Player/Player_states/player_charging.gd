@@ -23,10 +23,10 @@ func process_input(_event: InputEvent):
 	return null
 		
 func process_physics(_delta: float):
-	parent_component.set_mouse_position()
+	parent.set_mouse_position()
 	show_future_momentum(power_arrow.scale.x * MAX_CHARGING_VALUE)
-	draw_circle()
 	parent.queue_redraw()
+	draw_circle()
 	resize_power_arrow()
 	recolor_power_arrow()
 	move_power_arrow()
@@ -37,13 +37,13 @@ func process_physics(_delta: float):
 	return null
 	
 func move_power_arrow():
-	power_arrow.look_at(parent_component.mouse_position)
+	power_arrow.look_at(parent.mouse_position)
 
 func recolor_power_arrow():
 	power_arrow.set_self_modulate(Color8(255, 230 - int(power_arrow.scale.x * MAX_CHARGING_VALUE * 10), 0))
 
 func resize_power_arrow():
-	var distance = parent_component.mouse_position.distance_to(parent.position)
+	var distance = parent.mouse_position.distance_to(parent.position)
 	var target_scale = distance / 20
 	
 	target_scale = clamp(target_scale, 0, MAX_CHARGING_VALUE)
@@ -71,7 +71,7 @@ func show_future_momentum(value: float):
 	parent.future_momentum = parent.future_momentum - value
 
 func can_change_state_to_idle() -> bool:
-	return !parent_component.mouse_in_near(parent_component.MOUSE_DISTANCE_BUFFER)
+	return !parent.mouse_in_near(parent.MOUSE_DISTANCE_BUFFER)
 	
 func can_change_state_to_is_charged() -> bool:
-	return Input.is_action_just_released("left_click") and parent_component.mouse_in_near(parent_component.MOUSE_DISTANCE_BUFFER)
+	return Input.is_action_just_released("left_click") and parent.mouse_in_near(parent.MOUSE_DISTANCE_BUFFER)

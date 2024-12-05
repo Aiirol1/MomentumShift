@@ -13,6 +13,6 @@ func process_frame(_delta: float):
 	return null
 
 func _on_player_got_hit(damage): ##maybe if player has moved and got hit then no damage
-	parent_component._on_momentum_changed(-damage)
+	parent.update_momentum(damage, parent.substract_momentum)
 	changed_value = true
 	

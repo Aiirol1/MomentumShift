@@ -2,7 +2,6 @@ extends Node
 class_name State
 
 var parent: CharacterBody2D
-var parent_component: Node
 var anim_player: AnimationPlayer
 
 func enter():

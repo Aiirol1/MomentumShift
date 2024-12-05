@@ -16,9 +16,6 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_00fsv"]
 radius = 16.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_64pnm"]
-radius = 20.0998
-
 [sub_resource type="Animation" id="Animation_0iq7y"]
 length = 0.001
 tracks/0/type = "value"
@@ -43,7 +40,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(0.482353, 0, 0, 0)]
+"values": [Color(0.482353, 0, 0, 1)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -76,6 +73,9 @@ _data = {
 "die": ExtResource("9_d8omp")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_64pnm"]
+radius = 20.0998
+
 [node name="Inspector" instance=ExtResource("1_i3r7j")]
 script = ExtResource("2_c755v")
 resource = ExtResource("3_ucsgu")
@@ -98,6 +98,11 @@ script = ExtResource("6_qf34c")
 [node name="die" parent="state_machine" index="3"]
 script = ExtResource("8_323gv")
 
+[node name="AnimationPlayer" parent="." index="3"]
+libraries = {
+"": SubResource("AnimationLibrary_6xxo5")
+}
+
 [node name="Wall_detector" parent="." index="4"]
 target_position = Vector2(0, 76)
 
@@ -106,11 +111,6 @@ target_position = Vector2(0, 32)
 
 [node name="CollisionShape2D" parent="Hit_area" index="0"]
 shape = SubResource("CircleShape2D_64pnm")
-
-[node name="AnimationPlayer" parent="." index="10"]
-libraries = {
-"": SubResource("AnimationLibrary_6xxo5")
-}
 
 [node name="Health_bar" parent="Health_HUD" index="0"]
 offset_left = -47.0
