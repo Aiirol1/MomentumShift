@@ -17,8 +17,8 @@ const MAX_CHARGING_VALUE: int = 4
 
 
 func enter():
-	parent_component._on_momentum_changed(-power_arrow.scale.x * MAX_CHARGING_VALUE)
-	parent_component.reset_future_momentum()
+	parent.update_momentum(power_arrow.scale.x * MAX_CHARGING_VALUE, parent.substract_momentum)
+	parent.reset_future_momentum()
 
 	move()
 	
@@ -41,8 +41,8 @@ func get_shoot_values() -> Vector2:
 	var newPos: Vector2
 	var x_pos = parent.position.x
 	var y_pos = parent.position.y
-	newPos.x = x_pos - (parent_component.charged_mouse_pos.x - x_pos) * 2
-	newPos.y = y_pos - (parent_component.charged_mouse_pos.y - y_pos) * 2
+	newPos.x = x_pos - (parent.charged_mouse_pos.x - x_pos) * 2
+	newPos.y = y_pos - (parent.charged_mouse_pos.y - y_pos) * 2
 	
 	return newPos
 	
@@ -71,8 +71,6 @@ func calculate_bounce_off_position():
 	var bounce_strength: float = collider.get_meta("bounce_strength")  if (collider.has_meta("bounce_strength"))  else 1
 	parent.velocity = parent.velocity.bounce(collision.get_normal()) * bounce_strength
 	start_pos = parent.position
-
-
 
 func can_change_state_to_idle() -> bool:
 	return parent.velocity == Vector2.ZERO

@@ -4,10 +4,9 @@ extends Node
 
 var current_state: State
 
-func init(parent: CharacterBody2D, parent_component: Node, anim_player: AnimationPlayer) -> void:
+func init(parent: CharacterBody2D, anim_player: AnimationPlayer) -> void:
 	for child in get_children():
 		child.parent = parent
-		child.parent_component = parent_component
 		child.anim_player = anim_player
 
 	change_state(starting_state)

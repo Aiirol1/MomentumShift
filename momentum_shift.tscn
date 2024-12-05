@@ -7,22 +7,6 @@
 
 [node name="Momentum_Shift" type="Node2D"]
 
-[node name="GUI_layer" type="CanvasLayer" parent="."]
-
-[node name="Momentum_bar" type="ProgressBar" parent="GUI_layer"]
-modulate = Color(0, 0.678431, 1, 1)
-offset_right = 152.0
-offset_bottom = 27.0
-value = 50.0
-rounded = true
-
-[node name="Future_momentum_bar" type="ProgressBar" parent="GUI_layer"]
-offset_right = 152.0
-offset_bottom = 27.0
-value = 50.0
-rounded = true
-show_percentage = false
-
 [node name="Tile_maps" type="Node2D" parent="."]
 
 [node name="Default_floor" parent="Tile_maps" instance=ExtResource("1_e6qdv")]
@@ -36,10 +20,8 @@ floor = NodePath("../../Default_floor")
 [node name="Wall_horizontal" parent="Tile_maps/Default_wall" index="1" node_paths=PackedStringArray("floor")]
 floor = NodePath("../../Default_floor")
 
-[node name="Player" parent="." node_paths=PackedStringArray("momentum_bar", "future_momentum_bar") instance=ExtResource("1_cko0r")]
+[node name="Player" parent="." instance=ExtResource("1_cko0r")]
 position = Vector2(217, 135)
-momentum_bar = NodePath("../GUI_layer/Momentum_bar")
-future_momentum_bar = NodePath("../GUI_layer/Future_momentum_bar")
 
 [node name="Enemies" type="Node2D" parent="."]
 

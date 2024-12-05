@@ -35,6 +35,11 @@ die = NodePath("../die")
 [node name="die" type="Node" parent="state_machine" index="3"]
 script = ExtResource("5_ydglw")
 
+[node name="AnimationPlayer" parent="." index="3"]
+libraries = {
+"": SubResource("AnimationLibrary_60svd")
+}
+
 [node name="Wall_detector" type="RayCast2D" parent="." index="4"]
 unique_name_in_owner = true
 
@@ -60,12 +65,7 @@ unique_name_in_owner = true
 [node name="Invincible_cooldown" type="Timer" parent="." index="9"]
 unique_name_in_owner = true
 
-[node name="AnimationPlayer" parent="." index="10"]
-libraries = {
-"": SubResource("AnimationLibrary_60svd")
-}
-
-[node name="Health_HUD" type="CanvasLayer" parent="." index="11"]
+[node name="Health_HUD" type="CanvasLayer" parent="." index="10"]
 unique_name_in_owner = true
 follow_viewport_enabled = true
 

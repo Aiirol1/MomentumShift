@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_v0fh6")
-lives = 5
+lives = 300
 name = "Player"
