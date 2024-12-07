@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Live_power_up_resource" load_steps=2 format=3 uid="uid://d35oqd5kbcmtx"]
+
+[ext_resource type="Script" path="res://Interactables/Power-ups/live-powerup/Live_power_up_resource.gd" id="1_7nwyq"]
+
+[resource]
+script = ExtResource("1_7nwyq")
+lives_to_add = 50
+Name = "Live_power_up"

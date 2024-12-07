@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddna0migbj6j5"]
+
+[ext_resource type="PackedScene" uid="uid://buakx7grtqljk" path="res://Interactables/interactable.tscn" id="1_f1wtt"]
+[ext_resource type="Script" path="res://Interactables/Power-ups/power_up.gd" id="2_ja07h"]
+
+[node name="Power_up" instance=ExtResource("1_f1wtt")]
+script = ExtResource("2_ja07h")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

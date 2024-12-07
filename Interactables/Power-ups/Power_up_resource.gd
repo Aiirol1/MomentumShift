@@ -1,0 +1,2 @@
+extends Interactable_resource
+class_name Power_up_resource

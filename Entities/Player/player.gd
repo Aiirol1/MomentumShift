@@ -13,15 +13,24 @@ var mouse_position: Vector2
 var charged_mouse_pos: Vector2
 
 
-var add_momentum = func(value):
-	momentum += value
+var add = func(value, value_to_add):
+	var new_value = value + value_to_add
+	if new_value > MAX_HEALTH:
+		return MAX_HEALTH
+	else:
+		return value + value_to_add
 
-var substract_momentum = func(value):
-	momentum -= value
+var substract = func(value, value_to_substract):
+	var new_value = value - value_to_substract
+	if new_value <= 0:
+		return 0
+	else:
+		return value - value_to_substract
 
 const MOUSE_DISTANCE_BUFFER: int = 100
 const MAX_MOMENTUM: int = 100
 const CAMERA_ZOOM: Vector2 = Vector2(1, 1)
+const MAX_HEALTH: int = 1000
 
 signal got_hit(damage: int)
 
@@ -84,7 +93,7 @@ func tween_finished():
 	future_momentum_bar.hide()
 
 func update_momentum(value, operation: Callable):
-	operation.call(value)
+	momentum = operation.call(momentum, value)
 	var tween = get_tree().create_tween()
 	tween.tween_property(momentum_bar, "value", momentum, 0.6)
 	
@@ -93,16 +102,16 @@ func refresh_momentum():
 	
 	if lives > momentum_to_fill: 
 		momentum = MAX_MOMENTUM
-		remove_live(momentum_to_fill)
+		update_lives(momentum_to_fill, substract)
 	else:
 		momentum += lives
-		remove_live(lives)
+		update_lives(lives, substract)
 	
 	var tween = get_tree().create_tween()
 	tween.tween_property(momentum_bar, "value", momentum, 1)
 	
-func remove_live(value):
-	lives -= value
+func update_lives(value, operation: Callable):
+	lives = operation.call(lives, value)
 	
 	var tween = get_tree().create_tween()
 	tween.tween_property(health_bar, "value", lives, 1)
