@@ -1,11 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://cjim5aniugmvh"]
+[gd_scene load_steps=6 format=3 uid="uid://cjim5aniugmvh"]
 
 [ext_resource type="PackedScene" uid="uid://cyo6jjluneu1g" path="res://Entities/Player/player.tscn" id="1_cko0r"]
 [ext_resource type="PackedScene" uid="uid://c5slifgbpmqxc" path="res://Environment/Ground/Default_floor/DefaultFloor.tscn" id="1_e6qdv"]
 [ext_resource type="PackedScene" uid="uid://ccp43fisu8aek" path="res://Environment/Border/Default_wall/Default_wall.tscn" id="2_ib5eh"]
 [ext_resource type="PackedScene" uid="uid://byaej8aqgi16" path="res://Entities/Enemies/Inspector/inspector.tscn" id="3_nqkhu"]
+[ext_resource type="PackedScene" uid="uid://bukp8y4ugpx2w" path="res://Interactables/Power-ups/live-powerup/live_power_up.tscn" id="5_tw6ku"]
 
 [node name="Momentum_Shift" type="Node2D"]
+metadata/_edit_horizontal_guides_ = [-128.0]
 
 [node name="Tile_maps" type="Node2D" parent="."]
 
@@ -20,12 +22,17 @@ floor = NodePath("../../Default_floor")
 [node name="Wall_horizontal" parent="Tile_maps/Default_wall" index="1" node_paths=PackedStringArray("floor")]
 floor = NodePath("../../Default_floor")
 
-[node name="Player" parent="." instance=ExtResource("1_cko0r")]
-position = Vector2(217, 135)
-
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Inspector" parent="Enemies" instance=ExtResource("3_nqkhu")]
 position = Vector2(266, 136)
+
+[node name="Interactables" type="Node2D" parent="."]
+
+[node name="Live_power_up" parent="Interactables" instance=ExtResource("5_tw6ku")]
+position = Vector2(264, 87)
+
+[node name="Player" parent="." instance=ExtResource("1_cko0r")]
+position = Vector2(217, 135)
 
 [editable path="Tile_maps/Default_wall"]

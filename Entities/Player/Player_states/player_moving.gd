@@ -17,7 +17,7 @@ const MAX_CHARGING_VALUE: int = 4
 
 
 func enter():
-	parent.update_momentum(power_arrow.scale.x * MAX_CHARGING_VALUE, parent.substract_momentum)
+	parent.update_momentum(power_arrow.scale.x * MAX_CHARGING_VALUE, parent.substract)
 	parent.reset_future_momentum()
 
 	move()

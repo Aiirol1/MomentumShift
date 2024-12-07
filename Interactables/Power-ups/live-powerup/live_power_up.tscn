@@ -1,0 +1,61 @@
+[gd_scene load_steps=10 format=3 uid="uid://bukp8y4ugpx2w"]
+
+[ext_resource type="PackedScene" uid="uid://ddna0migbj6j5" path="res://Interactables/Power-ups/power_up.tscn" id="1_e16bb"]
+[ext_resource type="Script" path="res://Interactables/Power-ups/live-powerup/live_power_up.gd" id="2_aa4ek"]
+[ext_resource type="Texture2D" uid="uid://bbtva74urbgm4" path="res://Interactables/Power-ups/live-powerup/Assets/Live_power_up.png" id="3_c3xd8"]
+[ext_resource type="Resource" uid="uid://d35oqd5kbcmtx" path="res://Interactables/Power-ups/live-powerup/live_power_up_resource.tres" id="3_du1a7"]
+[ext_resource type="Animation" uid="uid://dcqktdsryd4jy" path="res://Interactables/Power-ups/live-powerup/Animations/Idle.res" id="4_uc7xe"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0da2v"]
+radius = 12.0
+
+[sub_resource type="Animation" id="Animation_su61w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5m68l"]
+_data = {
+"Idle": ExtResource("4_uc7xe"),
+"RESET": SubResource("Animation_su61w")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eyw2t"]
+size = Vector2(10, 7.33333)
+
+[node name="Live_power_up" instance=ExtResource("1_e16bb")]
+position = Vector2(0, -3)
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("2_aa4ek")
+resource = ExtResource("3_du1a7")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("3_c3xd8")
+offset = Vector2(0, -3)
+
+[node name="Area2D" parent="." index="1"]
+collision_layer = 16
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("CapsuleShape2D_0da2v")
+
+[node name="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_5m68l")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
+position = Vector2(0, -1.33333)
+shape = SubResource("RectangleShape2D_eyw2t")

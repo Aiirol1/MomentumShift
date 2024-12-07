@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://buakx7grtqljk"]
+
+[ext_resource type="Script" path="res://Interactables/interactable.gd" id="1_o8xsw"]
+
+[node name="Interactable" type="StaticBody2D"]
+scale = Vector2(0.75, 0.75)
+script = ExtResource("1_o8xsw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
