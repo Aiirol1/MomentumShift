@@ -14,14 +14,23 @@ var charged_mouse_pos: Vector2
 
 
 var add = func(value, value_to_add):
-	return value + value_to_add
+	var new_value = value + value_to_add
+	if new_value > MAX_HEALTH:
+		return MAX_HEALTH
+	else:
+		return value + value_to_add
 
 var substract = func(value, value_to_substract):
-	return value - value_to_substract
+	var new_value = value - value_to_substract
+	if new_value <= 0:
+		return 0
+	else:
+		return value - value_to_substract
 
 const MOUSE_DISTANCE_BUFFER: int = 100
 const MAX_MOMENTUM: int = 100
 const CAMERA_ZOOM: Vector2 = Vector2(1, 1)
+const MAX_HEALTH: int = 1000
 
 signal got_hit(damage: int)
 
