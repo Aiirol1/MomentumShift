@@ -7,6 +7,7 @@ extends State
 
 
 func enter():
+	parent.reset_effects()
 	parent.reset_zoom()
 	parent.hide_circle()
 	parent.reset_future_momentum()

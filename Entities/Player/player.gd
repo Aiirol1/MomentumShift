@@ -152,3 +152,5 @@ func use_item(event: InputEventKey):
 			var effect_resource = item.get_meta("Effect_resource")
 			effect_resource.call("add_effect", item)
 	
+func reset_effects(): ##effects which have a finite amount of uses --> item_resource.uses and item.resource.has_timeout
+	effect_resource.no_momentum_use = false

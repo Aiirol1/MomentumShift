@@ -155,18 +155,14 @@ text = "Items"
 
 [node name="Item_1" type="TextureRect" parent="GUI_layer/Item_grid" index="1"]
 layout_mode = 2
-metadata/Effect_resource = null
 
 [node name="Item_2" type="TextureRect" parent="GUI_layer/Item_grid" index="2"]
 layout_mode = 2
-metadata/Effect_resource = null
 
 [node name="Item_3" type="TextureRect" parent="GUI_layer/Item_grid" index="3"]
 layout_mode = 2
-metadata/Effect_resource = null
 
 [node name="Item_4" type="TextureRect" parent="GUI_layer/Item_grid" index="4"]
 layout_mode = 2
-metadata/Effect_resource = null
 
 [connection signal="got_hit" from="." to="state_machine/hit" method="_on_player_got_hit"]
