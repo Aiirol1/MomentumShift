@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://co3qpbd8mxurl"]
+
+[ext_resource type="PackedScene" uid="uid://c2ld4a8xttk0x" path="res://Interactables/Items/Item.tscn" id="1_6xbgs"]
+[ext_resource type="Script" path="res://Interactables/Items/No_momentum_use_item/no_momentum_use_item.gd" id="2_qee6t"]
+[ext_resource type="Texture2D" uid="uid://cxst0yjbx88o4" path="res://Interactables/Items/No_momentum_use_item/Assets/No_momentum_use_item.png" id="3_34qli"]
+[ext_resource type="Resource" uid="uid://cqpu8xkbjkygu" path="res://Interactables/Items/No_momentum_use_item/Resources/No_momentum_use_item_resource.tres" id="3_hnaom"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vqtda"]
+size = Vector2(25.7418, 25.7418)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ucbjx"]
+size = Vector2(17.5425, 17.5425)
+
+[node name="No_momentum_use" instance=ExtResource("1_6xbgs")]
+script = ExtResource("2_qee6t")
+resource = ExtResource("3_hnaom")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("3_34qli")
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2(0.464467, 0)
+rotation = 0.785398
+shape = SubResource("RectangleShape2D_vqtda")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
+position = Vector2(-1.19209e-07, 0)
+rotation = 0.785398
+shape = SubResource("RectangleShape2D_ucbjx")

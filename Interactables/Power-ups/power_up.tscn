@@ -5,5 +5,3 @@
 
 [node name="Power_up" instance=ExtResource("1_f1wtt")]
 script = ExtResource("2_ja07h")
-
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

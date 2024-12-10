@@ -5,12 +5,15 @@ class_name Player
 @onready var future_momentum_bar: TextureProgressBar = %Future_momentum_bar
 @onready var camera = %Camera2D
 @onready var health_bar = %Health_bar
+@onready var item_grid = %Item_grid
 
 var circle_color: Color = Color.RED
 var momentum: float = 100
 var future_momentum: float = 100
 var mouse_position: Vector2
 var charged_mouse_pos: Vector2
+
+const ITEM_SLOT_NAME_PREFIX: String = "Item_"
 
 
 var add = func(value, value_to_add):
@@ -93,6 +96,9 @@ func tween_finished():
 	future_momentum_bar.hide()
 
 func update_momentum(value, operation: Callable):
+	if effect_resource.no_momentum_use:
+		return
+	
 	momentum = operation.call(momentum, value)
 	var tween = get_tree().create_tween()
 	tween.tween_property(momentum_bar, "value", momentum, 0.6)
@@ -116,5 +122,33 @@ func update_lives(value, operation: Callable):
 	var tween = get_tree().create_tween()
 	tween.tween_property(health_bar, "value", lives, 1)
 	
+func get_next_free_item_slot() -> TextureRect:
+	for child in item_grid.get_children():
+		if !child is TextureRect:
+			continue
+		elif child.texture:
+			continue
+		else: 
+			return child
+	return null
 
+func init_item_slots():
+	var count = 1
+	for child in item_grid.get_children():
+		if !child is TextureRect:
+			continue
+		child.name = ITEM_SLOT_NAME_PREFIX + str(count)
+
+func _unhandled_key_input(event):
+	if event.is_pressed() and event is InputEventKey:
+		use_item(event)
+		
+func use_item(event: InputEventKey):
+	var item_slots = item_grid.get_children()
+	var item_to_use = ITEM_SLOT_NAME_PREFIX + event.as_text_keycode()
+	
+	for item in item_slots:
+		if item.name == item_to_use and item.has_meta("Effect_resource"):
+			var effect_resource = item.get_meta("Effect_resource")
+			effect_resource.call("add_effect", item)
 	

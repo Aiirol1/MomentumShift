@@ -1,0 +1,2 @@
+extends Entitiy_effect_resource
+class_name Enemy_effect_resource

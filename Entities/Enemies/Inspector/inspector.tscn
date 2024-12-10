@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://d0rdfkx3y0btb" path="res://Entities/Enemies/Enemy.tscn" id="1_i3r7j"]
 [ext_resource type="Texture2D" uid="uid://bmqdnageli0bp" path="res://Entities/Enemies/Inspector/Assets/Inspector.png" id="2_au1iv"]
 [ext_resource type="Script" path="res://Entities/Enemies/Inspector/inspector.gd" id="2_c755v"]
-[ext_resource type="Resource" uid="uid://daun1bdqmqh34" path="res://Entities/Enemies/Inspector/inspector_resource.tres" id="3_ucsgu"]
+[ext_resource type="Resource" uid="uid://daun1bdqmqh34" path="res://Entities/Enemies/Inspector/Resources/inspector_resource.tres" id="3_ucsgu"]
 [ext_resource type="Script" path="res://Entities/Enemies/Inspector/Inspector_states/inspector_move.gd" id="4_k0ud3"]
 [ext_resource type="Script" path="res://Entities/Enemies/Inspector/Inspector_states/inspector_attack.gd" id="5_wxnm5"]
 [ext_resource type="Script" path="res://Entities/Enemies/Inspector/Inspector_states/inspector_hit.gd" id="6_qf34c"]

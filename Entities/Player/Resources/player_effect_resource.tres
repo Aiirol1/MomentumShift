@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Player_effect_resource" load_steps=2 format=3 uid="uid://cilxl3uob76cm"]
+
+[ext_resource type="Script" path="res://Entities/Player/Resources/player_effect_resource.gd" id="1_64cck"]
+
+[resource]
+script = ExtResource("1_64cck")
+no_momentum_use = false
+name = "Player"

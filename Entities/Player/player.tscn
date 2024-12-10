@@ -1,11 +1,12 @@
-[gd_scene load_steps=22 format=3 uid="uid://cyo6jjluneu1g"]
+[gd_scene load_steps=23 format=3 uid="uid://cyo6jjluneu1g"]
 
 [ext_resource type="PackedScene" uid="uid://d2tdx64nl3l34" path="res://Entities/Entity.tscn" id="1_jo22g"]
 [ext_resource type="Texture2D" uid="uid://danav7imjwb4g" path="res://Entities/Player/Assets/Player.png" id="1_lyds5"]
 [ext_resource type="Script" path="res://Entities/Player/player.gd" id="1_uis4d"]
-[ext_resource type="Shader" path="res://Entities/Player/player.gdshader" id="2_d6sxo"]
+[ext_resource type="Shader" path="res://Entities/Player/Assets/player.gdshader" id="2_d6sxo"]
 [ext_resource type="Texture2D" uid="uid://b3mnda382e4vw" path="res://Entities/Player/Assets/PowerArrow.png" id="3_5mpvn"]
-[ext_resource type="Resource" uid="uid://n1x535wq55m7" path="res://Entities/Player/player_resource.tres" id="3_xbxuj"]
+[ext_resource type="Resource" uid="uid://n1x535wq55m7" path="res://Entities/Player/Resources/player_resource.tres" id="3_xbxuj"]
+[ext_resource type="Resource" uid="uid://cilxl3uob76cm" path="res://Entities/Player/Resources/player_effect_resource.tres" id="4_v3xj5"]
 [ext_resource type="Script" path="res://Entities/Player/Player_states/player_charging.gd" id="5_jusku"]
 [ext_resource type="Script" path="res://Entities/Player/Player_states/player_idle.gd" id="5_tugsi"]
 [ext_resource type="Script" path="res://Entities/Player/Player_states/player_is_charged.gd" id="7_pet0m"]
@@ -40,6 +41,7 @@ collision_layer = 4
 collision_mask = 19
 script = ExtResource("1_uis4d")
 resource = ExtResource("3_xbxuj")
+effect_resource = ExtResource("4_v3xj5")
 
 [node name="Sprite2D" parent="." index="0"]
 material = SubResource("ShaderMaterial_ickyu")
@@ -97,9 +99,16 @@ libraries = {
 
 [node name="GUI_layer" type="CanvasLayer" parent="." index="6"]
 
-[node name="Momentum_bar" type="TextureProgressBar" parent="GUI_layer" index="0"]
+[node name="Status_bars" type="Control" parent="GUI_layer" index="0"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Momentum_bar" type="TextureProgressBar" parent="GUI_layer/Status_bars" index="0"]
 unique_name_in_owner = true
 modulate = Color(0, 0.678431, 1, 1)
+layout_mode = 0
 offset_right = 152.0
 offset_bottom = 32.0
 scale = Vector2(3, 3)
@@ -109,8 +118,9 @@ fill_mode = 2
 texture_under = ExtResource("14_pn2s0")
 texture_progress = ExtResource("15_gvdrd")
 
-[node name="Future_momentum_bar" type="TextureProgressBar" parent="GUI_layer" index="1"]
+[node name="Future_momentum_bar" type="TextureProgressBar" parent="GUI_layer/Status_bars" index="1"]
 unique_name_in_owner = true
+layout_mode = 0
 offset_right = 152.0
 offset_bottom = 32.0
 scale = Vector2(3, 3)
@@ -120,8 +130,9 @@ fill_mode = 2
 texture_under = ExtResource("14_pn2s0")
 texture_progress = ExtResource("16_oqm37")
 
-[node name="Health_bar" type="TextureProgressBar" parent="GUI_layer" index="2"]
+[node name="Health_bar" type="TextureProgressBar" parent="GUI_layer/Status_bars" index="2"]
 unique_name_in_owner = true
+layout_mode = 0
 offset_right = 32.0
 offset_bottom = 32.0
 scale = Vector2(3, 3)
@@ -129,5 +140,33 @@ value = 100.0
 fill_mode = 2
 texture_under = ExtResource("16_fwvr5")
 texture_progress = ExtResource("17_eebp0")
+
+[node name="Item_grid" type="VBoxContainer" parent="GUI_layer" index="1"]
+unique_name_in_owner = true
+offset_left = 532.0
+offset_right = 576.0
+offset_bottom = 178.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="GUI_layer/Item_grid" index="0"]
+layout_mode = 2
+text = "Items"
+
+[node name="Item_1" type="TextureRect" parent="GUI_layer/Item_grid" index="1"]
+layout_mode = 2
+metadata/Effect_resource = null
+
+[node name="Item_2" type="TextureRect" parent="GUI_layer/Item_grid" index="2"]
+layout_mode = 2
+metadata/Effect_resource = null
+
+[node name="Item_3" type="TextureRect" parent="GUI_layer/Item_grid" index="3"]
+layout_mode = 2
+metadata/Effect_resource = null
+
+[node name="Item_4" type="TextureRect" parent="GUI_layer/Item_grid" index="4"]
+layout_mode = 2
+metadata/Effect_resource = null
 
 [connection signal="got_hit" from="." to="state_machine/hit" method="_on_player_got_hit"]

@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Item_resource" load_steps=2 format=3 uid="uid://dkj3hh26cvp83"]
+
+[ext_resource type="Script" path="res://Interactables/Items/Resources/Item_resource.gd" id="1_8um1i"]
+
+[resource]
+script = ExtResource("1_8um1i")
+Name = "Item"
