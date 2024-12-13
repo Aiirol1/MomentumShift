@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://byaej8aqgi16"]
+[gd_scene load_steps=16 format=3 uid="uid://byaej8aqgi16"]
 
 [ext_resource type="PackedScene" uid="uid://d0rdfkx3y0btb" path="res://Entities/Enemies/Enemy.tscn" id="1_i3r7j"]
 [ext_resource type="Texture2D" uid="uid://bmqdnageli0bp" path="res://Entities/Enemies/Inspector/Assets/Inspector.png" id="2_au1iv"]
@@ -9,12 +9,15 @@
 [ext_resource type="Script" path="res://Entities/Enemies/Inspector/Inspector_states/inspector_hit.gd" id="6_qf34c"]
 [ext_resource type="Script" path="res://Entities/Enemies/Inspector/Inspector_states/inspector_die.gd" id="8_323gv"]
 [ext_resource type="Animation" uid="uid://b52ow6s6k2rb7" path="res://Entities/Enemies/Inspector/Animations/die.res" id="9_d8omp"]
-[ext_resource type="LabelSettings" uid="uid://mocr45yi7vav" path="res://Assets/Fonts/Roboto_condensed/Enemy_health_robot_condensed.tres" id="10_f54fr"]
-[ext_resource type="StyleBox" uid="uid://btv64tynpudw0" path="res://Entities/Enemies/Assets/enemy_health_bar_background.tres" id="10_grty6"]
-[ext_resource type="StyleBox" uid="uid://b32xsbf8c6ga2" path="res://Entities/Enemies/Assets/enemy_health_bar_fill.tres" id="11_agysu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_00fsv"]
 radius = 16.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_4a541"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u7htu"]
+texture = SubResource("CanvasTexture_4a541")
+modulate_color = Color(0.482353, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_0iq7y"]
 length = 0.001
@@ -66,6 +69,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [""]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Health_HUD/Health_bar:theme_override_styles/background")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("StyleBoxTexture_u7htu")]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6xxo5"]
 _data = {
@@ -113,27 +128,18 @@ target_position = Vector2(0, 32)
 shape = SubResource("CircleShape2D_64pnm")
 
 [node name="Health_bar" parent="Health_HUD" index="0"]
-offset_left = -47.0
-offset_top = -38.0
-offset_right = 47.0
-offset_bottom = -25.0
-theme_override_styles/background = ExtResource("10_grty6")
-theme_override_styles/fill = ExtResource("11_agysu")
-max_value = 10.0
-value = 5.0
-show_percentage = false
+offset_left = -74.0
+offset_top = -40.0
+offset_right = 75.0
+offset_bottom = -24.0
+theme_override_styles/background = SubResource("StyleBoxTexture_u7htu")
 
 [node name="Health_display" parent="Health_HUD/Health_bar" index="0"]
-layout_mode = 1
 anchors_preset = 13
-anchor_left = 0.5
-anchor_right = 0.5
+anchor_top = 0.0
 anchor_bottom = 1.0
-offset_left = -3.0
-offset_top = -1.0
-offset_right = 4.0
-offset_bottom = 3.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = -5.0
+offset_top = 0.0
+offset_right = 5.0
+offset_bottom = 0.0
 text = ""
-label_settings = ExtResource("10_f54fr")

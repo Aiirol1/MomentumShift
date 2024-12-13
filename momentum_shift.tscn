@@ -27,7 +27,6 @@ floor = NodePath("../../Default_floor")
 
 [node name="Inspector" parent="Enemies" instance=ExtResource("3_nqkhu")]
 position = Vector2(266, 136)
-effect_resource = null
 
 [node name="Interactables" type="Node2D" parent="."]
 
@@ -39,7 +38,12 @@ position = Vector2(264, 87)
 [node name="Items" type="Node2D" parent="Interactables"]
 
 [node name="No_momentum_use" parent="Interactables/Items" instance=ExtResource("5_dci8r")]
-position = Vector2(206, 201)
+position = Vector2(202, 209)
+collision_layer = 1
+collision_mask = 1
+
+[node name="No_momentum_use2" parent="Interactables/Items" instance=ExtResource("5_dci8r")]
+position = Vector2(206, 261)
 collision_layer = 1
 collision_mask = 1
 

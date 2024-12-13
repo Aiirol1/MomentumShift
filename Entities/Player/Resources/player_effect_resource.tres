@@ -1,8 +1,10 @@
-[gd_resource type="Resource" script_class="Player_effect_resource" load_steps=2 format=3 uid="uid://cilxl3uob76cm"]
+[gd_resource type="Resource" script_class="Player_effect_resource" load_steps=3 format=3 uid="uid://cilxl3uob76cm"]
 
+[ext_resource type="Resource" uid="uid://cqpu8xkbjkygu" path="res://Interactables/Items/No_momentum_use_item/Resources/No_momentum_use_item_resource.tres" id="1_4m5sy"]
 [ext_resource type="Script" path="res://Entities/Player/Resources/player_effect_resource.gd" id="1_64cck"]
 
 [resource]
 script = ExtResource("1_64cck")
-no_momentum_use = false
-name = "Player"
+no_momentum_use = ExtResource("1_4m5sy")
+no_momentum_use_reset_condition = null
+name = "Player_effect_resource"

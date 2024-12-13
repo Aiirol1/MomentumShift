@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cyo6jjluneu1g"]
+[gd_scene load_steps=25 format=3 uid="uid://cyo6jjluneu1g"]
 
 [ext_resource type="PackedScene" uid="uid://d2tdx64nl3l34" path="res://Entities/Entity.tscn" id="1_jo22g"]
 [ext_resource type="Texture2D" uid="uid://danav7imjwb4g" path="res://Entities/Player/Assets/Player.png" id="1_lyds5"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://ycl1hw11yo7v" path="res://Entities/Player/Assets/Health_bar_under.png" id="16_fwvr5"]
 [ext_resource type="Texture2D" uid="uid://b0wgu4u1mp1iv" path="res://Entities/Player/Assets/Future_Momentum_bar_fill.png" id="16_oqm37"]
 [ext_resource type="Texture2D" uid="uid://f8rl0ibnajrh" path="res://Entities/Player/Assets/Health_bar_fill.png" id="17_eebp0"]
+[ext_resource type="Script" path="res://Entities/Player/Item_grid/item_slot.gd" id="19_e6juk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ickyu"]
 shader = ExtResource("2_d6sxo")
@@ -35,6 +36,9 @@ _data = {
 "RESET": SubResource("Animation_w8m03"),
 "flash": ExtResource("13_lphw1")
 }
+
+[sub_resource type="LabelSettings" id="LabelSettings_u13sk"]
+font_size = 8
 
 [node name="Player" instance=ExtResource("1_jo22g")]
 collision_layer = 4
@@ -149,20 +153,128 @@ offset_bottom = 178.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="GUI_layer/Item_grid" index="0"]
+[node name="Items" type="Label" parent="GUI_layer/Item_grid" index="0"]
 layout_mode = 2
 text = "Items"
 
 [node name="Item_1" type="TextureRect" parent="GUI_layer/Item_grid" index="1"]
 layout_mode = 2
+script = ExtResource("19_e6juk")
+
+[node name="Item_uses" type="Label" parent="GUI_layer/Item_grid/Item_1" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -11.5
+offset_right = 5.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Key" type="Label" parent="GUI_layer/Item_grid/Item_1" index="1"]
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 40.0
+grow_vertical = 0
+text = "[1]"
+label_settings = SubResource("LabelSettings_u13sk")
 
 [node name="Item_2" type="TextureRect" parent="GUI_layer/Item_grid" index="2"]
 layout_mode = 2
+script = ExtResource("19_e6juk")
+
+[node name="Item_uses" type="Label" parent="GUI_layer/Item_grid/Item_2" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3.5
+offset_top = -11.5
+offset_right = 3.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Key" type="Label" parent="GUI_layer/Item_grid/Item_2" index="1"]
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 40.0
+grow_vertical = 0
+text = "[2]"
+label_settings = SubResource("LabelSettings_u13sk")
 
 [node name="Item_3" type="TextureRect" parent="GUI_layer/Item_grid" index="3"]
 layout_mode = 2
+script = ExtResource("19_e6juk")
+
+[node name="Item_uses" type="Label" parent="GUI_layer/Item_grid/Item_3" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3.0
+offset_top = -11.5
+offset_right = 3.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Key" type="Label" parent="GUI_layer/Item_grid/Item_3" index="1"]
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 40.0
+grow_vertical = 0
+text = "[3]"
+label_settings = SubResource("LabelSettings_u13sk")
 
 [node name="Item_4" type="TextureRect" parent="GUI_layer/Item_grid" index="4"]
 layout_mode = 2
+script = ExtResource("19_e6juk")
+
+[node name="Item_uses" type="Label" parent="GUI_layer/Item_grid/Item_4" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -11.5
+offset_right = 4.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Key" type="Label" parent="GUI_layer/Item_grid/Item_4" index="1"]
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 40.0
+grow_vertical = 0
+text = "[4]"
+label_settings = SubResource("LabelSettings_u13sk")
 
 [connection signal="got_hit" from="." to="state_machine/hit" method="_on_player_got_hit"]

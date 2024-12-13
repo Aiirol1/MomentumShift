@@ -1,4 +1,5 @@
 extends State
+class_name Player_moving
 
 @export var idle: State
 
@@ -17,7 +18,8 @@ const MAX_CHARGING_VALUE: int = 4
 
 
 func enter():
-	parent.update_momentum(power_arrow.scale.x * MAX_CHARGING_VALUE, parent.substract)
+	
+	parent.update_momentum(power_arrow.scale.x * MAX_CHARGING_VALUE, parent.substract, "Input")
 	parent.reset_future_momentum()
 
 	move()
@@ -74,3 +76,6 @@ func calculate_bounce_off_position():
 
 func can_change_state_to_idle() -> bool:
 	return parent.velocity == Vector2.ZERO
+
+func exit():
+	GPS.last_state = self

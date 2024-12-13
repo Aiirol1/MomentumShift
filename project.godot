@@ -19,6 +19,10 @@ run/main_scene="res://momentum_shift.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GPS="*res://Global_scripts/Global_player_script.gd"
+
 [display]
 
 window/size/viewport_width=576

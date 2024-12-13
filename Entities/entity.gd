@@ -10,6 +10,11 @@ class_name entity
 var lives: int
 
 func _ready():
+	resource = resource.duplicate(true)
+	
+	if effect_resource:
+		effect_resource = effect_resource.duplicate(true)
+	
 	lives = resource.lives
 	state_machine.init(self, animation_player)
 	

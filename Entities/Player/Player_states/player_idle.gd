@@ -24,3 +24,6 @@ func process_frame(_delta: float):
 	
 func can_change_state_to_charging() -> bool:
 	return Input.is_action_pressed("left_click") and parent.mouse_in_near(parent.MOUSE_DISTANCE_BUFFER) and parent.momentum > 0
+
+func exit():
+	GPS.last_state = self

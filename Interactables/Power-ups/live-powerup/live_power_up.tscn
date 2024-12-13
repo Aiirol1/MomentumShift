@@ -109,3 +109,4 @@ libraries = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
 position = Vector2(0, -1.33333)
 shape = SubResource("RectangleShape2D_eyw2t")
+disabled = true

@@ -26,11 +26,7 @@ func take_damage():
 	parent.resource.lives -= 1
 	can_take_damage = false
 	hit_cooldown.start()
-	parent.health_display.text = str(parent.resource.lives)
-	
-	var tween = get_tree().create_tween()
-	
-	tween.tween_property(parent.health_bar, "value", parent.resource.lives, 0.3)
+	health_hud.update(parent.resource)
 	
 
 	

@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://Entities/Player/Resources/player_resource.gd" id="1_v0fh6"]
 
-
 [resource]
 script = ExtResource("1_v0fh6")
 lives = 300

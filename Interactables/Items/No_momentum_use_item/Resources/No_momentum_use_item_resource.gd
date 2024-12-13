@@ -3,16 +3,15 @@ class_name No_momentum_use_item_resource
 
 var player: Player
 
+
 func add_effect(owner):
 	super(owner)
-	player.effect_resource.no_momentum_use = true
+	player.set_no_momentum_use(true)
 	
-			
-	if uses <= 0:
-		remove_effect(owner)
-	
-
 		
 func remove_effect(owner):
 	super(owner)
-	player.effect_resource.no_momentum_use = false
+	player.set_no_momentum_use(false)
+
+func is_resource_active() -> bool:
+	return player.effect_resource.no_momentum_use_active()
