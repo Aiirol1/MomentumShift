@@ -1,7 +1,8 @@
 extends CharacterBody2D
 class_name entity
 
-@export var resource: Resource
+@export var resource: Entity_resource
+@export var effect_resource: Entitiy_effect_resource
 
 @onready var state_machine = %state_machine
 @onready var animation_player = %AnimationPlayer
@@ -9,6 +10,11 @@ class_name entity
 var lives: int
 
 func _ready():
+	resource = resource.duplicate(true)
+	
+	if effect_resource:
+		effect_resource = effect_resource.duplicate(true)
+	
 	lives = resource.lives
 	state_machine.init(self, animation_player)
 	

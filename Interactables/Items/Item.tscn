@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2ld4a8xttk0x"]
+
+[ext_resource type="PackedScene" uid="uid://buakx7grtqljk" path="res://Interactables/interactable.tscn" id="1_i5nk2"]
+[ext_resource type="Script" path="res://Interactables/Items/item.gd" id="2_lv4y1"]
+[ext_resource type="Resource" uid="uid://dkj3hh26cvp83" path="res://Interactables/Items/Resources/Item_resource.tres" id="3_p2qyc"]
+
+[node name="Item" instance=ExtResource("1_i5nk2")]
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("2_lv4y1")
+resource = ExtResource("3_p2qyc")
+
+[node name="Area2D" parent="." index="1"]
+unique_name_in_owner = true

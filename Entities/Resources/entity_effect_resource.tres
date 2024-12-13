@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Entitiy_effect_resource" load_steps=2 format=3 uid="uid://d1g1jmcxfhe02"]
+
+[ext_resource type="Script" path="res://Entities/Resources/entitiy_effect_resource.gd" id="1_3rht8"]
+
+[resource]
+script = ExtResource("1_3rht8")
+name = "Entity"

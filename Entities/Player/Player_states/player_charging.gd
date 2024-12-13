@@ -1,4 +1,5 @@
 extends State
+class_name Player_charging
 
 @export var is_charged: State
 @export var idle: State
@@ -75,3 +76,6 @@ func can_change_state_to_idle() -> bool:
 	
 func can_change_state_to_is_charged() -> bool:
 	return Input.is_action_just_released("left_click") and parent.mouse_in_near(parent.MOUSE_DISTANCE_BUFFER)
+
+func exit():
+	GPS.last_state = self

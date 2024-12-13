@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cjim5aniugmvh"]
+[gd_scene load_steps=7 format=3 uid="uid://cjim5aniugmvh"]
 
 [ext_resource type="PackedScene" uid="uid://cyo6jjluneu1g" path="res://Entities/Player/player.tscn" id="1_cko0r"]
 [ext_resource type="PackedScene" uid="uid://c5slifgbpmqxc" path="res://Environment/Ground/Default_floor/DefaultFloor.tscn" id="1_e6qdv"]
 [ext_resource type="PackedScene" uid="uid://ccp43fisu8aek" path="res://Environment/Border/Default_wall/Default_wall.tscn" id="2_ib5eh"]
 [ext_resource type="PackedScene" uid="uid://byaej8aqgi16" path="res://Entities/Enemies/Inspector/inspector.tscn" id="3_nqkhu"]
+[ext_resource type="PackedScene" uid="uid://co3qpbd8mxurl" path="res://Interactables/Items/No_momentum_use_item/no_momentum_use_item.tscn" id="5_dci8r"]
 [ext_resource type="PackedScene" uid="uid://bukp8y4ugpx2w" path="res://Interactables/Power-ups/live-powerup/live_power_up.tscn" id="5_tw6ku"]
 
 [node name="Momentum_Shift" type="Node2D"]
@@ -29,8 +30,22 @@ position = Vector2(266, 136)
 
 [node name="Interactables" type="Node2D" parent="."]
 
-[node name="Live_power_up" parent="Interactables" instance=ExtResource("5_tw6ku")]
+[node name="Power_ups" type="Node2D" parent="Interactables"]
+
+[node name="Live_power_up" parent="Interactables/Power_ups" instance=ExtResource("5_tw6ku")]
 position = Vector2(264, 87)
+
+[node name="Items" type="Node2D" parent="Interactables"]
+
+[node name="No_momentum_use" parent="Interactables/Items" instance=ExtResource("5_dci8r")]
+position = Vector2(202, 209)
+collision_layer = 1
+collision_mask = 1
+
+[node name="No_momentum_use2" parent="Interactables/Items" instance=ExtResource("5_dci8r")]
+position = Vector2(206, 261)
+collision_layer = 1
+collision_mask = 1
 
 [node name="Player" parent="." instance=ExtResource("1_cko0r")]
 position = Vector2(217, 135)

@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Power_up_resource" load_steps=2 format=3 uid="uid://b0r7c1g4llg1"]
+
+[ext_resource type="Script" path="res://Interactables/Power-ups/Resources/Power_up_resource.gd" id="1_hg8vj"]
+
+[resource]
+script = ExtResource("1_hg8vj")
+Name = "Power_up"

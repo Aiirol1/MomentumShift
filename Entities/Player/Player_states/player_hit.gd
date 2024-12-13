@@ -1,4 +1,5 @@
 extends State
+class_name player_hit
 
 @export var idle: State
 
@@ -12,7 +13,10 @@ func process_frame(_delta: float):
 		return idle
 	return null
 
-func _on_player_got_hit(damage): ##maybe if player has moved and got hit then no damage
+func _on_player_got_hit(damage):
 	parent.update_momentum(damage, parent.substract)
 	changed_value = true
+	
+func exit():
+	GPS.last_state = self
 	

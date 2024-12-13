@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="No_momentum_use_item_resource" load_steps=2 format=3 uid="uid://cqpu8xkbjkygu"]
+
+[ext_resource type="Script" path="res://Interactables/Items/No_momentum_use_item/Resources/No_momentum_use_item_resource.gd" id="1_higli"]
+
+[resource]
+script = ExtResource("1_higli")
+has_timeout = false
+timeout = 5.0
+uses = 3
+Name = "No_momentum_use_item"
