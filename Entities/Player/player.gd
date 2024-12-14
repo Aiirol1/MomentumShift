@@ -48,7 +48,6 @@ func _ready():
 	
 func _physics_process(delta):
 	state_machine.process_physics(delta)
-	print(effect_resource.effects["no_momentum_use"][2])
 	
 	if Input.is_action_just_pressed("F"):
 		refresh_momentum()

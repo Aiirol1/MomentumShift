@@ -6,28 +6,27 @@ class_name Player_moving
 
 @export var power_arrow: Sprite2D
 
-var start_pos: Vector2
-var movement: Vector2
-var bouncing: bool = false
 var collision: KinematicCollision2D
 
-const FRICTION: int = 1000
-const MAX_SPEED: int = 800
-const ACCELERATION: int = 500
+const FRICTION: int = 700
+const MIN_SPEED: int = 600
+const MAX_SPEED: int = 1000
+const MAX_DISTANCE: int = 500
 const MAX_CHARGING_VALUE: int = 4
 
 
 func enter():
-	
 	parent.update_momentum(power_arrow.scale.x * MAX_CHARGING_VALUE, parent.substract, "Input")
 	parent.reset_future_momentum()
 
 	move()
 	
 func process_physics(delta: float):
-	collision = parent.move_and_collide(parent.velocity * delta)
-	bounce_off()
-	handle_smooth_movement(delta)
+	if parent.velocity.length() > 0:
+		collision = parent.move_and_collide(parent.velocity * delta)
+		if collision:
+			bounce_off()
+		handle_smooth_movement(delta)
 	
 	if can_change_state_to_idle():
 		return idle
@@ -35,44 +34,30 @@ func process_physics(delta: float):
 
 	
 func move():
-	start_pos = parent.position
-	movement = get_shoot_values()
+	parent.velocity = get_shoot_values()
 	power_arrow.hide()
 
 func get_shoot_values() -> Vector2:
-	var newPos: Vector2
-	var x_pos = parent.position.x
-	var y_pos = parent.position.y
-	newPos.x = x_pos - (parent.charged_mouse_pos.x - x_pos) * 2
-	newPos.y = y_pos - (parent.charged_mouse_pos.y - y_pos) * 2
+	var player_pos = parent.global_position
+	var distance = player_pos.distance_to(parent.charged_mouse_pos)
+	distance = clamp(distance, 0, MAX_DISTANCE)
+	var charge_factor = 1 - exp(-3 * (distance / MAX_DISTANCE))
+	var shoot_speed = lerp(MIN_SPEED, MAX_SPEED, charge_factor)
+	var shoot_direction = (player_pos - parent.charged_mouse_pos).normalized()
+	return shoot_direction * shoot_speed
 	
-	return newPos
-	
-func handle_smooth_movement(delta):
-	var total_distance = start_pos.distance_to(movement)
-	var current_distance = parent.position.distance_to(start_pos)
-
-	if current_distance >= total_distance:
-		if parent.velocity.length() > FRICTION * delta:
-			parent.velocity -= parent.velocity.normalized() * FRICTION * delta
-		else:
-			parent.velocity = Vector2.ZERO
-			bouncing = false
-	else:
-		if !bouncing:
-			parent.velocity = parent.position.direction_to(movement) * ACCELERATION
-			parent.velocity = parent.velocity.limit_length(MAX_SPEED)
-
+func handle_smooth_movement(delta: float):
+	parent.velocity = parent.velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+		
 func bounce_off():
 	if collision:
-		bouncing = true
-		calculate_bounce_off_position()
+		var collider = collision.get_collider()
+		var bounce_strength = collider.get_meta("bounce_strength") if collider.has_meta("bounce_strength") else 1.0
+		var incoming_velocity = parent.velocity
+		var reflected_velocity = incoming_velocity.bounce(collision.get_normal())
 		
-func calculate_bounce_off_position():
-	var collider: Object = collision.get_collider()
-	var bounce_strength: float = collider.get_meta("bounce_strength")  if (collider.has_meta("bounce_strength"))  else 1
-	parent.velocity = parent.velocity.bounce(collision.get_normal()) * bounce_strength
-	start_pos = parent.position
+		parent.velocity = reflected_velocity * bounce_strength
+		
 
 func can_change_state_to_idle() -> bool:
 	return parent.velocity == Vector2.ZERO
