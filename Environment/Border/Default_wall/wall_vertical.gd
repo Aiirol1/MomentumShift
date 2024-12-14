@@ -1,26 +1,17 @@
 extends Walls
 
-
 func spawn_wall():
-	set_y_cells_on_left()
-	set_y_cells_on_right()
+	draw_inner_tiles()
+	draw_outer_tiles()
 
-func set_y_cells_on_left():
-	var y_cells: Array[Vector2i] = floor.get_left_tiles_x_values()
+func draw_inner_tiles():
+	var inner_tiles: Array[Vector2] = floor.inner_tiles_down
 	
-	for value in y_cells:
-		if value.y > 0:
-			set_cell(Vector2i(value.x, value.y), 0, Vector2i(0, 0), 0)
-			if !floor.has_tile_on_left_side(value):
-				set_cell(Vector2i(value.x - 1, value.y), 0, Vector2i(0, 0), 0)
+	for cell in inner_tiles:
+		set_cell(Vector2(cell.x - 1, cell.y), 0, Vector2i(0, 0), 0)
 
-			
-func set_y_cells_on_right():
-	var y_cells: Array[Vector2i] = floor.get_right_tiles_x_values()
+func draw_outer_tiles():
+	var outer_tiles: Array[Vector2] = floor.outer_tiles_down
 	
-	for value in y_cells:
-		if value.y > 0:
-			set_cell(Vector2i(value.x, value.y), 0, Vector2i(0, 0), 0)
-			if floor.has_tile_on_left_side(value):
-				set_cell(Vector2i(value.x + 1, value.y), 0, Vector2i(0, 0), 0)
-			
+	for cell in outer_tiles:
+		set_cell(Vector2(cell.x + 1, cell.y), 0, Vector2i(0, 0), 0)

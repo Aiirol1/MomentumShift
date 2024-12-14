@@ -45,6 +45,7 @@ func _ready():
 	init_health_bar()
 	init_item_slots()
 	fill_effect_dict()
+	position = GPS.starting_pos
 	
 func _physics_process(delta):
 	state_machine.process_physics(delta)
