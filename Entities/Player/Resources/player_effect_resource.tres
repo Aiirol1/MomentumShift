@@ -6,5 +6,4 @@
 [resource]
 script = ExtResource("1_64cck")
 no_momentum_use = ExtResource("1_4m5sy")
-no_momentum_use_reset_condition = null
 name = "Player_effect_resource"
