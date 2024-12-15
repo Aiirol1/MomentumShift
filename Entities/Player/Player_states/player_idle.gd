@@ -10,7 +10,7 @@ func enter():
 	parent.reset_effects()
 	parent.reset_zoom()
 	parent.hide_circle()
-	parent.reset_future_momentum()
+	parent.update_future_momentum(parent.momentum)
 	power_arrow.hide()
 
 func process_input(_event: InputEvent):
