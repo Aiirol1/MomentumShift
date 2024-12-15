@@ -91,9 +91,10 @@ func hide_circle():
 	circle_color = Color.TRANSPARENT
 	queue_redraw()
 
-func reset_future_momentum():
+func update_future_momentum(value: float):
 	var tween = get_tree().create_tween()
-	tween.tween_property(future_momentum_bar, "value", momentum, 0.6)
+	future_momentum = value
+	tween.tween_property(future_momentum_bar, "value", future_momentum, 0.6)
 	tween.finished.connect(tween_finished)
 	
 func tween_finished():
@@ -115,10 +116,20 @@ func refresh_momentum():
 	if lives > momentum_to_fill: 
 		momentum = MAX_MOMENTUM
 		update_lives(momentum_to_fill, substract)
+
 	else:
 		momentum += lives
 		update_lives(lives, substract)
+		
+	refresh_future_momentum()
 	
+func refresh_future_momentum():
+	if future_momentum < 0:
+		update_future_momentum(momentum + future_momentum)
+	else:
+		update_future_momentum(momentum - (100 -future_momentum))
+	
+
 	var tween = get_tree().create_tween()
 	tween.tween_property(momentum_bar, "value", momentum, 1)
 	
