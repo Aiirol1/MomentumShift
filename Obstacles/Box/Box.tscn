@@ -1,0 +1,26 @@
+[gd_scene load_steps=7 format=3 uid="uid://dkel4y3kdva5n"]
+
+[ext_resource type="PackedScene" uid="uid://cr2x1oei78kcs" path="res://Obstacles/Obstacle.tscn" id="1_ykgsk"]
+[ext_resource type="Script" path="res://Obstacles/Box/Box.gd" id="2_h0ao4"]
+[ext_resource type="Resource" uid="uid://ckhemtsxbib2b" path="res://Obstacles/Box/Resources/Box_resource.tres" id="3_4d5va"]
+[ext_resource type="Texture2D" uid="uid://buymwayl44t0v" path="res://Obstacles/Box/Assets/Box.png" id="3_w003o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r82s2"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0u55b"]
+size = Vector2(37, 38)
+
+[node name="Box" instance=ExtResource("1_ykgsk")]
+script = ExtResource("2_h0ao4")
+resource = ExtResource("3_4d5va")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("3_w003o")
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_r82s2")
+
+[node name="CollisionShape2D" parent="Collision_area" index="0"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_0u55b")

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Obstacle_resource" load_steps=2 format=3 uid="uid://ckhemtsxbib2b"]
+
+[ext_resource type="Script" path="res://Obstacles/Resources/Obstacle_resource.gd" id="1_ow7af"]
+
+[resource]
+script = ExtResource("1_ow7af")
+can_be_destroyed = true
+lives = 2

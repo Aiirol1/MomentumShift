@@ -42,7 +42,7 @@ font_size = 8
 
 [node name="Player" instance=ExtResource("1_jo22g")]
 collision_layer = 4
-collision_mask = 19
+collision_mask = 27
 safe_margin = 0.16
 script = ExtResource("1_uis4d")
 resource = ExtResource("3_xbxuj")

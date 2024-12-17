@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cr2x1oei78kcs"]
+
+[ext_resource type="Script" path="res://Obstacles/Obstacle.gd" id="1_7shie"]
+[ext_resource type="Resource" uid="uid://ccc11uo5w8b5x" path="res://Obstacles/Resources/Obstacle_resource.tres" id="2_chwuh"]
+
+[node name="Obstacle" type="StaticBody2D"]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_7shie")
+resource = ExtResource("2_chwuh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Collision_area" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision_area"]
+
+[connection signal="body_entered" from="Collision_area" to="." method="_on_collision_area_body_entered"]
