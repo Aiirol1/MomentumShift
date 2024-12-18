@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://cjim5aniugmvh"]
+[gd_scene load_steps=8 format=3 uid="uid://cjim5aniugmvh"]
 
+[ext_resource type="Script" path="res://momentum_shift.gd" id="1_bmkrr"]
 [ext_resource type="PackedScene" uid="uid://cyo6jjluneu1g" path="res://Entities/Player/player.tscn" id="1_cko0r"]
 [ext_resource type="PackedScene" uid="uid://c5slifgbpmqxc" path="res://Environment/Ground/Default_floor/DefaultFloor.tscn" id="1_e6qdv"]
 [ext_resource type="PackedScene" uid="uid://ccp43fisu8aek" path="res://Environment/Border/Default_wall/Default_wall.tscn" id="2_ib5eh"]
@@ -8,9 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://bukp8y4ugpx2w" path="res://Interactables/Power-ups/live-powerup/live_power_up.tscn" id="5_tw6ku"]
 
 [node name="Momentum_Shift" type="Node2D"]
+script = ExtResource("1_bmkrr")
 metadata/_edit_horizontal_guides_ = [-128.0]
 
 [node name="Tile_maps" type="Node2D" parent="."]
+unique_name_in_owner = true
 
 [node name="Default_floor" parent="Tile_maps" instance=ExtResource("1_e6qdv")]
 
@@ -27,6 +30,7 @@ floor = NodePath("../../Default_floor")
 
 [node name="Inspector" parent="Enemies" instance=ExtResource("3_nqkhu")]
 position = Vector2(266, 136)
+collision_mask = 7
 
 [node name="Interactables" type="Node2D" parent="."]
 
@@ -47,7 +51,9 @@ position = Vector2(206, 261)
 collision_layer = 1
 collision_mask = 1
 
+[node name="Obstacles" type="Node2D" parent="."]
+unique_name_in_owner = true
+
 [node name="Player" parent="." instance=ExtResource("1_cko0r")]
-position = Vector2(-100, 30)
 
 [editable path="Tile_maps/Default_wall"]

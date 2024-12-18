@@ -25,6 +25,7 @@ texture = SubResource("CanvasTexture_xlunr")
 modulate_color = Color(1, 0, 0, 1)
 
 [node name="Enemy" instance=ExtResource("1_6sxo4")]
+collision_mask = 15
 script = ExtResource("2_blguu")
 resource = ExtResource("3_hrxf7")
 effect_resource = ExtResource("3_pscgq")

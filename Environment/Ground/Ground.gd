@@ -61,13 +61,14 @@ func draw_ground():
 		next_direction = get_random_direction()
 		if step == steps - 1: last_step = true
 		
+		var first_step: bool = step == 0
 		if direction == directions.STRAIGHT:
-			draw_straight()
+			draw_straight(first_step)
 		elif direction == directions.DOWN:
-			draw_down()
+			draw_down(first_step)
 			
 			
-func draw_straight():
+func draw_straight(first_step: bool):
 	var height = get_random_height(5, 7)
 	var width = get_random_width(10, 12)
 	total_width += width
@@ -85,11 +86,13 @@ func draw_straight():
 			if next_dir_is_value(directions.DOWN) and is_straight_at_end(j, width) and !last_step:
 				outer_tiles_down.append(cell_coords)
 			
+			if first_step: add_tile_to_spawn_proof(cell_coords)
+			
 			var is_at_beginning = func(): return total_width - width == 0 and j == 0
-			if  is_at_beginning:
+			if  is_at_beginning.call():
 				inner_tiles_down.append(cell_coords)
 	
-func draw_down():
+func draw_down(first_step: bool):
 	var width = get_random_width(5, 7)
 	var height = get_random_height(10, 12)
 	total_height += height
@@ -106,8 +109,11 @@ func draw_down():
 			if next_dir_is_value(directions.STRAIGHT) and is_down_at_end(j, height) and !last_step:
 				outer_tiles_straight.append(Vector2(cell_coords.x, cell_coords.y + 2)) #manipulate y coordinate because walls would not be placed correctly
 			
+			if first_step: add_tile_to_spawn_proof(cell_coords)
+			
 			var is_at_beginning = func(): return  total_height - height == 0 and j == 0
-			if is_at_beginning:
+			if is_at_beginning.call():
+				GPS.spawn_proof_area.append(cell_coords)
 				outer_tiles_straight.append(cell_coords)
 
 func is_straight_at_end(pos: int, width: int) -> bool:
@@ -118,3 +124,6 @@ func is_down_at_end(pos: int, height: int) -> bool:
 	
 func next_dir_is_value(value: directions):
 	return next_direction == value
+
+func add_tile_to_spawn_proof(tile: Vector2):
+	GPS.spawn_proof_area.append(tile)

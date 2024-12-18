@@ -14,6 +14,7 @@ var effects: Dictionary # = {
 #exports getting value to late to initalize here 
 #trying to keep the commented dictionary up to date 
 #so its not needed to switch between player script and this script
+#would also be a constant if possible
 
 func reset_effects():  ##effects which have a finite amount of uses --> item_resource.uses and item.resource.has_timeout can be resetted here
 	for effect in effects:

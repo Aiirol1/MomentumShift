@@ -1,5 +1,5 @@
 extends TileMapLayer
-class_name Walls
+class_name Border
 
 
 @export var floor: TileMapLayer

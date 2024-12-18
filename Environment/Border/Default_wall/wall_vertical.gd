@@ -1,4 +1,4 @@
-extends Walls
+extends Border
 
 func spawn_wall():
 	draw_inner_tiles()
