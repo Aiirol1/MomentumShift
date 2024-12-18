@@ -2,11 +2,10 @@
 
 [ext_resource type="Script" path="res://Entities/Enemies/Inspector/Resources/Inspector_resource.gd" id="1_cf5pa"]
 
-
 [resource]
 script = ExtResource("1_cf5pa")
 speed = 150
-damage = 10
+damage = 99
 attack_cooldown = 1.5
 invincible_cooldown = 2.0
 lives = 3
