@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://Entities/Enemies/Inspector/Resources/Inspector_resource.gd" id="1_cf5pa"]
 
-
 [resource]
 script = ExtResource("1_cf5pa")
 speed = 150

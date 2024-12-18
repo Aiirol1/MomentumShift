@@ -22,14 +22,11 @@ var add = func(value, value_to_add):
 	if new_value > MAX_HEALTH:
 		return MAX_HEALTH
 	else:
-		return value + value_to_add
+		return new_value
 
 var substract = func(value, value_to_substract):
 	var new_value = value - value_to_substract
-	if new_value <= 0:
-		return 0
-	else:
-		return value - value_to_substract
+	return new_value
 
 const MOUSE_DISTANCE_BUFFER: int = 100
 const MAX_MOMENTUM: int = 100
@@ -106,7 +103,14 @@ func update_momentum(value, operation: Callable, source: String = ""):
 	if no_momentum_use.call():
 		return
 	
-	momentum = operation.call(momentum, value)
+	##decrease lives if momentum is after subtraction below 0
+	var momentum_left: float = operation.call(momentum, value)
+	if momentum_left > 0:
+		momentum = momentum_left
+	else:
+		momentum = 0
+		update_lives(abs(momentum_left), substract)
+		
 	var tween = get_tree().create_tween()
 	tween.tween_property(momentum_bar, "value", momentum, 0.6)
 	
@@ -133,7 +137,7 @@ func refresh_future_momentum():
 	var tween = get_tree().create_tween()
 	tween.tween_property(momentum_bar, "value", momentum, 1)
 	
-func update_lives(value, operation: Callable):
+func update_lives(value: int, operation: Callable):
 	lives = operation.call(lives, value)
 	
 	var tween = get_tree().create_tween()
