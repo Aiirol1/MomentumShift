@@ -26,7 +26,7 @@ shader_parameter/active = false
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6cvar"]
-radius = 16.1245
+radius = 13.0
 
 [sub_resource type="Animation" id="Animation_w8m03"]
 length = 0.001
@@ -147,8 +147,8 @@ texture_progress = ExtResource("17_eebp0")
 
 [node name="Item_grid" type="VBoxContainer" parent="GUI_layer" index="1"]
 unique_name_in_owner = true
-offset_left = 532.0
-offset_right = 576.0
+offset_left = 595.0
+offset_right = 639.0
 offset_bottom = 178.0
 size_flags_horizontal = 4
 size_flags_vertical = 4

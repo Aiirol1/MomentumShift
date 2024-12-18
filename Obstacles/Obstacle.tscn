@@ -10,6 +10,7 @@ script = ExtResource("1_7shie")
 resource = ExtResource("2_chwuh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
@@ -18,5 +19,8 @@ collision_layer = 8
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collision_area"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
 
 [connection signal="body_entered" from="Collision_area" to="." method="_on_collision_area_body_entered"]

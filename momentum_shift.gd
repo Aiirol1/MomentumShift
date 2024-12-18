@@ -24,6 +24,7 @@ func _ready():
 	tile_size = floor.tile_set.tile_size as Vector2
 	half_tile_size = floor.tile_set.tile_size / 2 as Vector2
 	spawn_obstacles()
+	
 
 func spawn_obstacles():
 	add_spawn_proof_to_blocked_tiles()
@@ -50,9 +51,11 @@ func calculate_pos() -> Vector2:
 	var random_pos = random_cell.call()
 	random_pos = calc_pos.call(random_pos)
 
-	while tile_is_occupied(random_pos):
+	var loops: int = 0
+	while tile_is_occupied(random_pos) and loops < floor_cells.size():
 		random_pos = random_cell.call()
 		random_pos = calc_pos.call(random_pos)
+		loops += 1
 		
 	return random_pos
 	
