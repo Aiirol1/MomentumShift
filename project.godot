@@ -15,7 +15,7 @@ warnings/check_invalid_track_paths=false
 [application]
 
 config/name="Momentum Shift"
-run/main_scene="res://momentum_shift.tscn"
+run/main_scene="res://Momentum_Shift/momentum_shift.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 

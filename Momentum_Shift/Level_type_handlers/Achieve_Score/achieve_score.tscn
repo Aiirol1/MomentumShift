@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0nviwqv3k34d"]
+
+[ext_resource type="PackedScene" uid="uid://chmgldlm7lrxb" path="res://Momentum_Shift/Level_type_handlers/Level_type_handler.tscn" id="1_u1i2x"]
+[ext_resource type="Script" path="res://Momentum_Shift/Level_type_handlers/Achieve_Score/achieve_score.gd" id="2_aydw0"]
+
+[node name="Achieve_Score" instance=ExtResource("1_u1i2x")]
+script = ExtResource("2_aydw0")

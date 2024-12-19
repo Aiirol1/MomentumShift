@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://chmgldlm7lrxb"]
+
+[ext_resource type="Script" path="res://Momentum_Shift/Level_type_handlers/level_type_handler.gd" id="1_r4pi0"]
+
+[node name="LevelTypeHandler" type="Node"]
+script = ExtResource("1_r4pi0")

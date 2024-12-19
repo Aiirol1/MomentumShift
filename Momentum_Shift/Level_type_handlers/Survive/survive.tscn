@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdrumss7g7dtm"]
+
+[ext_resource type="PackedScene" uid="uid://chmgldlm7lrxb" path="res://Momentum_Shift/Level_type_handlers/Level_type_handler.tscn" id="1_epea1"]
+[ext_resource type="Script" path="res://Momentum_Shift/Level_type_handlers/Survive/survive.gd" id="2_h6ghr"]
+
+[node name="Survive" instance=ExtResource("1_epea1")]
+script = ExtResource("2_h6ghr")

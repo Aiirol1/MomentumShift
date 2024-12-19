@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://duhhgv3ogtmmm"]
+
+[ext_resource type="PackedScene" uid="uid://chmgldlm7lrxb" path="res://Momentum_Shift/Level_type_handlers/Level_type_handler.tscn" id="1_lky2u"]
+[ext_resource type="Script" path="res://Momentum_Shift/Level_type_handlers/Achieve_Goal_With_Item/achieve_goal_with_item.gd" id="2_udesh"]
+
+[node name="Achieve_Goal_With_Item" instance=ExtResource("1_lky2u")]
+script = ExtResource("2_udesh")

@@ -1,5 +1,6 @@
 extends Border
 
+
 func spawn_wall():
 	draw_inner_tiles()
 	draw_outer_tiles()

@@ -1,6 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://cioocaalo35o7"]
 
-[ext_resource type="Script" path="res://Environment/Ground/Default_floor/floor.gd" id="2_puknf"]
+[ext_resource type="Script" path="res://Environment/Ground/default_floor/default_floor.gd" id="2_puknf"]
+
 
 [node name="Ground" type="TileMapLayer"]
 rendering_quadrant_size = 32

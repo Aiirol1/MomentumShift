@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbcq8dveo1jx3"]
+
+[ext_resource type="PackedScene" uid="uid://chmgldlm7lrxb" path="res://Momentum_Shift/Level_type_handlers/Level_type_handler.tscn" id="1_00jm1"]
+[ext_resource type="Script" path="res://Momentum_Shift/Level_type_handlers/Bossfight/bossfight.gd" id="2_6ss1m"]
+
+[node name="Bossfight" instance=ExtResource("1_00jm1")]
+script = ExtResource("2_6ss1m")
